@@ -19,10 +19,9 @@ interface SearchPageProps {
     SearchError: string;
     ErrorStyle: string;
     Text: string;
-    Results: string;
 }
 
-const SearchPage: React.FC<SearchPageProps> = ({ idName, ContainerStyle, Heading, HeadingStyle, onSubmit, formStyle, Placeholder, inputStyle, Search, onChange, onClick, ButtonStyle, IconStyle,  SearchError, ErrorStyle, Text, Results }) => {
+const SearchPage: React.FC<SearchPageProps> = ({ idName, ContainerStyle, Heading, HeadingStyle, onSubmit, formStyle, Placeholder, inputStyle, Search, onChange, onClick, ButtonStyle, IconStyle,  SearchError, ErrorStyle, Text}) => {
 return (
     <div id={idName} className={ContainerStyle} >
         <h1 className={HeadingStyle}>{Heading}</h1>
@@ -33,7 +32,6 @@ return (
         </form> 
         <span className={ErrorStyle}>{SearchError}</span>
         <p>{Text}</p>
-        <p>{Results}</p>
     </div>
 )
 }
