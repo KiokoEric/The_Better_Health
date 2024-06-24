@@ -133,8 +133,8 @@ return (
                     onClick={BMICalculator}
                 />
                 <div className='flex gap-10 items-center justify-center mt-5'>
-                    <h3 className='font-bold text-2xl py-2 underline'>BMI Value: <span className='text-red-700'></span> </h3>
-                    <h3 className='font-bold text-2xl py-2 underline'>Class: <span className='text-red-700' ></span></h3>
+                    <h3 className='font-bold text-2xl py-2 underline'>BMI Value: <span className='text-red-700'>{Items.BMI}</span> </h3>
+                    <h3 className='font-bold text-2xl py-2 underline'>Class: <span className='text-red-700' ></span>{Items.Class}</h3>
                 </div>
             </section>
         </article>
