@@ -22,7 +22,7 @@ const Workout:React.FC = () => {
     useEffect(() => {
 
         const fetchExercise = async () => {
-            Axios.get(`https://better-health-server.onrender.com/Exercise/${userID}/Workout`, { 
+            Axios.get(`https://localhost:4000/Exercise/${userID}/Workout`, { 
             headers: { authorization: Cookie.auth_token }
             }) 
             .then((Data) => {

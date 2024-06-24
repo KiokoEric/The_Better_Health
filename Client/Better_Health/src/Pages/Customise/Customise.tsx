@@ -2,8 +2,8 @@ import * as z from 'zod';
 import Axios from "axios";
 import React, { useState } from 'react';
 import { useCookies } from "react-cookie";
-import { useForm, SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm, SubmitHandler } from 'react-hook-form';
 import Heading from '../../Components/Common/Heading/Heading';
 import Button from '../../Components/Common/Button/Button';
 
@@ -33,7 +33,7 @@ const Customise:React.FC = () => {
     });
 
     const AddWorkout: SubmitHandler<FormValues> = async (data) => {
-        await Axios.post("https://localhost:4000/Recipe/AddRecipe", data, {
+        await Axios.post("https://localhost:4000/Exercise/AddWorkout", data, {
             headers: { authorization: Cookie.auth_token },
         }) 
         console.log(data)
