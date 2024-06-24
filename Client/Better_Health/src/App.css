@@ -55,15 +55,15 @@ body {
   width: 100%;
 }
 #Registration {
-  background-image: linear-gradient( rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3) ), url(./assets/Registration_HomePage.jpg);
-  background-position: bottom;
+  background-image: linear-gradient( rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3) ), url(./assets/Register_HomePage.jpg);
+  background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   height: 250px;
   width: 100%;
 }
 #Login {
-  background-image: url(./assets/Login_Page.jpg);
+  background-image: linear-gradient( rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3) ), url(./assets/Login_HomePage.jpg);
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -72,14 +72,14 @@ body {
 }
 #Profile {
   background-image: url(./assets/Profile_HomePage.jpg);
-  background-position: bottom;
+  background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   height: 250px;
   width: 100%;
 }
 #EditProfile {
-  background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ),url(./assets/MyProfile.jpg);
+  background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ),url(./assets/My_Profile.jpg);
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
