@@ -6,15 +6,16 @@ interface ResultProps {
     imageStyle: string;
     TitleStyle: string;
     Title: string;
-    children: any;
+    Description?: string;
+    children?: any;
 }
 
-const Output: React.FC<ResultProps> = ({ figureStyle, image, imageStyle, TitleStyle, Title, children }) => {
+const Output: React.FC<ResultProps> = ({ figureStyle, image, imageStyle, TitleStyle, Title, Description, children }) => {
 return (
     <figure className={figureStyle} >
-        <img src={image} alt="" width="500px" className={imageStyle} /> 
+        <img src={image} alt="" className={imageStyle} /> 
         <figcaption>
-            <h2 className={TitleStyle}>{Title}</h2>
+            <h2 className={TitleStyle}>{Title} (<span>{Description}</span>)</h2>
             {children}
         </figcaption>
     </figure>
