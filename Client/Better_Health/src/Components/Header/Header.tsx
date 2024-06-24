@@ -62,7 +62,7 @@ return (
                 <Link to="/Customise" className='text-black no-underline'>
                     Customise Workout
                 </Link>
-                <Link to="/Workout" className='text-black no-underline'>
+                <Link to="/MyWorkout" className='text-black no-underline'>
                     My Workout 
                 </Link>
                 <Link to="/Favourites" className='text-black no-underline sm: hidden'> 
