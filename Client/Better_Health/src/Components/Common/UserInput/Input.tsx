@@ -1,7 +1,7 @@
 import React, { ChangeEvent } from 'react';
 
 interface InputProps {
-    onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+    onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
     ContainerStyle?: string;
     Label: string;
     LabelStyle: string,
