@@ -8,7 +8,7 @@ import Output from '../../Components/Common/Output/Output';
 const WorkoutDetails:React.FC = () => {
 
     const [Cookie, _] = useCookies(["auth_token"]);
-    const [Exercises, setExercises] = useState([])
+    const [Exercises, setExercises] = useState<any>([])
     const [Workouts, setWorkouts] = useState([])
     const [WorkoutName, setWorkoutName] = useState("")
     const [WorkoutImages, setWorkoutImages] = useState("")
@@ -102,8 +102,8 @@ return (
             image={WorkoutImages}
             imageStyle='rounded w-11/12'
             TitleStyle='capitalize font-bold text-black text-center text-3xl'
-            Title={Exercise.Name} 
-            Description={Exercise.Category}
+            Title={Exercises.Name} 
+            Description={Exercises.Category}
         >
             <div className="flex gap-3">
                 <h2 className="font-bold text-2xl">Target Muscle: {Exercises.Muscle}</h2>
