@@ -1,11 +1,13 @@
 import * as z from 'zod';
 import Axios from "axios";
-import React, { useState } from 'react';
 import { useCookies } from "react-cookie";
+import { useParams } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import Heading from '../../Components/Common/Heading/Heading';
 import Button from '../../Components/Common/Button/Button';
+import Heading from '../../Components/Common/Heading/Heading';
+
 
 interface FormValues {
     Name: string;
@@ -15,7 +17,9 @@ interface FormValues {
     Image: string;
 };
 
-const Customise:React.FC = () => {
+const EditWorkout:React.FC = () => {
+
+    const { _id } = useParams()
 
     const [ Cookie,_ ] = useCookies(["auth_token"]);
     const [ Success, setSuccess ] = useState('')
@@ -32,12 +36,18 @@ const Customise:React.FC = () => {
         resolver: zodResolver(RecipeSchema),
     });
 
-    const AddWorkout: SubmitHandler<FormValues> = async (data) => {
-        await Axios.post("https://localhost:4000/Exercise/AddWorkout", data, {
+    useEffect(() => {
+        Axios.get(`https://localhost:4000/Exercise/MyWorkouts/${_id}`, {
+            headers: { authorization: Cookie.auth_token },
+        }) 
+    }, [])
+
+    const EditWorkout: SubmitHandler<FormValues> = async (data) => {
+        await Axios.post(`https://localhost:4000/Exercise/MyWorkouts/${_id}`, data, {
             headers: { authorization: Cookie.auth_token },
         }) 
         console.log(data)
-        setSuccess('Workout has been successfully created.') 
+        setSuccess('Workout has been successfully edited.') 
     };
 
 return (
@@ -49,7 +59,7 @@ return (
             HeadingStyle='font-bold text-5xl'
         />
         <section className='flex flex-col items-center mb-5'>
-            <form method="post" onSubmit={handleSubmit(AddWorkout)} encType="multipart/form-data" className='flex flex-col gap-5'>
+            <form method="post" onSubmit={handleSubmit(EditWorkout)} encType="multipart/form-data" className='flex flex-col gap-5'>
                 <div className='flex flex-col gap-2'>
                     <label className='font-bold' htmlFor="">Name</label> 
                     <textarea placeholder="Enter Name..." {...register('Name', { required: 'Name is required' })} className='border-black border-b h-8 outline-none truncate px-1 py-1 text-black w-96' required />
@@ -98,7 +108,7 @@ return (
                     <Button
                         ButtonText='Create Workout'
                         ButtonStyle='bg-black cursor-pointer text-center text-white px-3 py-1 rounded'
-                        onClick={handleSubmit(AddWorkout)}
+                        onClick={handleSubmit(EditWorkout)}
                     />
                 </div>
             </form>
@@ -107,4 +117,4 @@ return (
 )
 }
 
-export default Customise
+export default EditWorkout
