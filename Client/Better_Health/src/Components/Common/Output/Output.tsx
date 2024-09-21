@@ -1,13 +1,13 @@
 import React from 'react';
 
 interface ResultProps {
-    figureStyle: string;
     image: string;
+    Title: string;
+    children?: any;
     imageStyle: string;
     TitleStyle: string;
-    Title: string;
+    figureStyle: string;
     Description?: string;
-    children?: any;
 }
 
 const Output: React.FC<ResultProps> = ({ figureStyle, image, imageStyle, TitleStyle, Title, Description, children }) => {
@@ -15,7 +15,7 @@ return (
     <figure className={figureStyle} >
         <img src={image} alt="" className={imageStyle} /> 
         <figcaption>
-            <h2 className={TitleStyle}>{Title} (<span>{Description}</span>)</h2>
+            <h2 className={TitleStyle}>{Title} <span>{Description}</span></h2>
             {children}
         </figcaption>
     </figure>
