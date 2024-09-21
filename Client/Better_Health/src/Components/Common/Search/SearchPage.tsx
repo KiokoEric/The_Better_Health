@@ -6,19 +6,19 @@ interface SearchPageProps {
     onChange: (e: ChangeEvent<HTMLInputElement>) => void;
     onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
     onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
-    idName: string;
-    ContainerStyle: string;
-    Heading: string;
-    HeadingStyle: string;
-    formStyle: string;
-    Placeholder: string;
-    inputStyle: string;
-    Search: string;
-    ButtonStyle: string;
-    IconStyle: string;
-    SearchError: string;
-    ErrorStyle: string;
     Text: string;
+    idName: string;
+    Search: string;
+    Heading: string;
+    formStyle: string;
+    IconStyle: string;
+    ErrorStyle: string;
+    inputStyle: string;
+    Placeholder: string;
+    ButtonStyle: string;
+    SearchError: string;
+    HeadingStyle: string;
+    ContainerStyle: string;
 }
 
 const SearchPage: React.FC<SearchPageProps> = ({ idName, ContainerStyle, Heading, HeadingStyle, onSubmit, formStyle, Placeholder, inputStyle, Search, onChange, onClick, ButtonStyle, IconStyle,  SearchError, ErrorStyle, Text}) => {
@@ -37,4 +37,3 @@ return (
 }
 
 export default React.memo(SearchPage)
-
