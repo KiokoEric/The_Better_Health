@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import Heading from '../../../Components/Common/Heading/Heading';
-import Input from '../../../Components/Common/UserInput/Input';
+import Input from '../../../Components/Common/Input/Input';
 
 const Profile:React.FC = () => {
 
