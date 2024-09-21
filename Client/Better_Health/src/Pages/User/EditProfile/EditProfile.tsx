@@ -1,6 +1,6 @@
 import React from 'react';
 import Heading from '../../../Components/Common/Heading/Heading';
-import Input from '../../../Components/Common/UserInput/Input';
+import Input from '../../../Components/Common/Input/Input';
 import Button from '../../../Components/Common/Button/Button';
 
 const EditProfile:React.FC = () => {

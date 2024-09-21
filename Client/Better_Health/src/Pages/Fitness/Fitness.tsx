@@ -1,6 +1,6 @@
 import React, { ChangeEvent, useState } from 'react';
 import Button from '../../Components/Common/Button/Button';
-import Input from '../../Components/Common/UserInput/Input';
+import Input from '../../Components/Common/Input/Input';
 
 const Fitness: React.FC = () => {
 
