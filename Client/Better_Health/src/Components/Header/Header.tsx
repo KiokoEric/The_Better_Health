@@ -1,23 +1,41 @@
-import Axios from "axios";
-import React, { useEffect, useState } from 'react';
+import axios from "axios";
 import { Link } from 'react-router-dom';
 import { FaUser } from "react-icons/fa6";
 import { useCookies } from "react-cookie";
-import { useNavigate } from "react-router-dom";
-import { useGetUserID } from "../Hooks/useGetUserID";
-import Logo from "../../assets/Header_Logo.webp";
 import Button from '../Common/Button/Button';
+import { useNavigate } from "react-router-dom";
+import { IoIosBookmark } from "react-icons/io";
+import Logo from "../../assets/Header_Logo.webp";
+import Navigate from "../Common/Navigate/Navigate";
+import React, { useEffect, useState } from 'react';
+import { useGetUserID } from "../Hooks/useGetUserID";
+import { faX } from '@fortawesome/free-solid-svg-icons';
+import { faBars } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const Header: React.FC = () => {
 
-    const [ Name, setName ] = useState("")
-    const [ Cookie,setCookie ] = useCookies(["auth_token"]);
     const UserID = useGetUserID()
+    const navigate = useNavigate()
+    const [ Cookie,setCookie ] = useCookies(["auth_token"]);
+
+    // USESTATE HOOK
+
+    const [ Name, setName ] = useState<string>("")
+    const [ExtendNavbar,setExtendNavbar ] = useState<boolean>(true) 
+
+    // OPENING AND CLOSING OF THE MOBILE MENU
+
+    const toggleMenu = () => {
+        setExtendNavbar(!ExtendNavbar);
+    };
+
+    // RECEIVING THE NAME OF THE USER
 
     useEffect(() => {
         
         const FetchName  = async() => {
-            await Axios.get(`http://localhost:4000/Users/${UserID}/Name`, {
+            await axios.get(`http://localhost:4000/Users/${UserID}/Name`, {
             headers: { authorization: Cookie.auth_token },
             }) 
             .then((Response) => {
@@ -29,82 +47,179 @@ const Header: React.FC = () => {
 
     },[UserID])
 
-    const navigate = useNavigate()
+    // LOGGING OUT OF ONE'S ACCOUNT
 
     const Logout = () => {
         setCookie("auth_token", "");
         window.localStorage.clear();
         navigate("/");
+        window.location.reload();
     }
 
 return (
     <div className='flex items-center justify-between px-2 py-1 shadow-lg sticky text-black'>
         <section>
-            <Link to="/" className='flex gap-4 items-center justify-center text-black no-underline'>
-                <img src={Logo} alt="" width="45px" />
-                <h1 className='font-bold text-3xl'>Better Health</h1>
-            </Link>
+            <Navigate
+                Navigation="/Home"
+                children={<img src={Logo} alt="" width="45px" />}
+                NavigateStyle="flex gap-4 font-bold items-center justify-center text-black text-2xl no-underline sm:text-3xl"
+                NavigateText="Better Health"
+            />
         </section>
-        <section>
-            <nav className='flex gap-10 items-center justify-center' >
-                <Link to="/" className='text-black no-underline'>
-                    Home
-                </Link>
-                <Link to="/Exercise" className='text-black no-underline'>
-                    Exercise
-                </Link>
-                <Link to="/Nutrition" className='text-black no-underline'>
-                    Nutrition
-                </Link>
-                <Link to="/Fitness_Calculator" className='text-black no-underline'  >
-                    Fitness Calculator
-                </Link>
-                <Link to="/Customise" className='text-black no-underline'>
-                    Customise Workout
-                </Link>
-                <Link to="/MyWorkout" className='text-black no-underline'>
-                    My Workout 
-                </Link>
-                <Link to="/Favourites" className='text-black no-underline sm: hidden'> 
-                    Favourites
-                </Link>
-            </nav>
-        </section>
-        <section className="flex items-center justify-center gap-2" >
-        <Link to="/Favourites" className='' >
-            <Button ButtonText='Favourites Recipes' ButtonStyle='bg-lightOrange px-3 py-1 rounded text-base text-white' />
-        </Link>
+        {/* NAVIGATION LINKS (HIDDEN ON MOBILE)  */}
+        <nav className='hidden xl:flex xl:gap-10 xl:items-center xl:justify-center'>
+            <Navigate 
+                Navigation='/Home'
+                NavigateStyle="text-black no-underline hover:text-Blue"
+                NavigateText="Home"
+            />
+            <Navigate 
+                Navigation='/Exercise'
+                NavigateStyle="text-black no-underline hover:text-Blue"
+                NavigateText="Exercise"
+            />
+            <Navigate 
+                Navigation='/Nutrition'
+                NavigateStyle="text-black no-underline hover:text-Blue"
+                NavigateText="Nutrition"
+            />
+            <Navigate 
+                Navigation='/Fitness_Calculator'
+                NavigateStyle="text-black no-underline hover:text-Blue"
+                NavigateText="Fitness Calculator"
+            />
+            <Navigate 
+                Navigation='/Customise'
+                NavigateStyle="text-black no-underline hover:text-Blue"
+                NavigateText="Customise Workout"
+            />
+            <Navigate 
+                Navigation='/MyWorkout'
+                NavigateStyle="text-black no-underline hover:text-Blue"
+                NavigateText="My Workout"
+            />
+        </nav>
+        <section className="hidden xl:flex xl:items-center xl:justify-center xl:gap-2">
+        <Navigate
+            Navigation="/Favourites"
+            children={<IoIosBookmark size="1.2rem" />} 
+            NavigateStyle="bg-Blue flex flex-row items-center justify-center gap-2 px-2 py-1 rounded-sm text-base text-white hover:text-bg-black"
+            NavigateText="Favourite Exercises"
+        />
+        { !UserID ?
+            <Navigate
+                Navigation="/Registration"
+                NavigateStyle="bg-black cursor-pointer text-center text-base text-white px-5 py-1 rounded"
+                NavigateText="Sign Up"
+            /> : null
+        }
         {
-            <Link to="/Registration">
-                <Button
-                    ButtonText='Sign Up'
-                    ButtonStyle='bg-black cursor-pointer text-center text-base text-white px-5 py-1 rounded'
-                />
-            </Link>
-            }
-            {
+        !Cookie.auth_token ?
+        (
+            <Navigate
+                Navigation="/"
+                NavigateStyle="bg-black cursor-pointer text-center text-base text-white px-5 py-1 rounded"
+                NavigateText="Login"
+            />
+        ) : 
+        (
+        <Button
+            ButtonText='Logout'
+            ButtonStyle='bg-black cursor-pointer h-8 text-center text-base text-white px-3 py-1 rounded-sm'
+            onClick={Logout}
+        />
+        )
+        }
+    {
+    UserID ? 
+        <Navigate
+            Navigation={`/Profile/${UserID}`}
+            children={<FaUser size="2rem" className="bg-black text-white cursor-pointer px-1.5 py-1.5 rounded-full" />}
+        /> : null
+}
+    
+    { UserID ? <h4 className="font-bold flex flex-col text-center"><span>Welcome</span>{Name}</h4> : null }
+</section>
+<div className="xl:hidden flex items-center gap-3 pb-0.5">
+    {
+    UserID ?
+        <Navigate
+            Navigation={`/Profile/${UserID}`}
+            children={<FaUser size="1.8rem" className="bg-black text-white cursor-pointer px-1.5 py-1.5 rounded-full" />}
+        /> : null
+    }
+    <Button
+        Children={ExtendNavbar ? <FontAwesomeIcon icon={faX} className="text-sm" /> : <FontAwesomeIcon icon={faBars} className="text-base" />}
+        ButtonStyle='focus:outline-none'
+        onClick={toggleMenu}
+    />
+    { UserID ? <h4 className="font-bold flex flex-col text-center"><span>Welcome</span>{Name}</h4> : null }
+</div>
+{/* MOBILE MENU */}
+{ExtendNavbar && (
+    <nav className="bg-white absolute top-16 right-0 flex flex-col gap-4 m-auto pl-4 pt-2 pb-8 rounded-Header text-base text-black w-36 xl:hidden">
+        <Navigate 
+            Navigation='/Home'
+            NavigateStyle="border-b border-black text-black no-underline w-28 hover:text-Blue"
+            NavigateText="Home"
+        />
+        <Navigate 
+            Navigation='/Exercise'
+            NavigateStyle="border-b border-black text-black no-underline w-28 hover:text-Blue"
+            NavigateText="Exercise"
+        />
+        <Navigate 
+            Navigation='/Nutrition'
+            NavigateStyle="border-b border-black text-black no-underline w-28 hover:text-Blue"
+            NavigateText="Nutrition"
+        />
+        <Navigate 
+            Navigation='/Fitness_Calculator'
+            NavigateStyle="border-b border-black text-black no-underline w-28 hover:text-Blue"
+            NavigateText="Fitness Calculator"
+        />
+        <Navigate 
+            Navigation='/Customise'
+            NavigateStyle="border-b border-black text-black no-underline w-28 hover:text-Blue"
+            NavigateText="Customise Workout"
+        />
+        <Navigate 
+            Navigation='/MyWorkout'
+            NavigateStyle="border-b border-black text-black no-underline w-28 hover:text-Blue"
+            NavigateText="My Workout"
+        />
+        <Navigate 
+            Navigation='/Favourites'
+            NavigateStyle="border-b border-black text-black no-underline w-28 hover:text-Blue"
+            NavigateText="Favourites"
+        />
+        {
+        !UserID? 
+            <Navigate 
+                Navigation='/Registration'
+                NavigateStyle="border-b border-black text-black no-underline w-28"
+                NavigateText="Sign Up"
+            /> : null
+        }
+        {
             !Cookie.auth_token ?
             (
-                <Link to="/Login">
-                    <Button
-                        ButtonText='Login'
-                        ButtonStyle='bg-black cursor-pointer text-center text-base text-white px-5 py-1 rounded'
-                    />
-                </Link>
+                <Navigate
+                    Navigation="/"
+                    NavigateStyle="border-b border-black text-black no-underline w-28"
+                    NavigateText="Login"
+                />
             ) : 
             (
-                <Button
-                    ButtonText='Logout'
-                    ButtonStyle='bg-black cursor-pointer h-8 text-center text-base text-white px-3 py-1 rounded'
-                    onClick={Logout}
-                />
-            )
-        }
-            <Link to={`/MyProfile`}>
-                <FaUser size="2rem" className="bg-black text-white cursor-pointer px-1.5 py-1.5 rounded-full" />
-            </Link>
-            { UserID ? <h4 className="font-bold flex flex-col text-center"><span>Welcome</span>{Name}</h4> : null }
-        </section>
+                <Navigate
+                NavigateStyle="border-b border-black text-black no-underline w-28"
+                            NavigateText="Logout"
+                            onClick={Logout}
+                        />
+                    )
+                }
+            </nav>
+        )}
     </div>
 )
 }
