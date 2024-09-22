@@ -103,7 +103,7 @@ return (
         <Navigate
             Navigation="/Favourites"
             children={<IoIosBookmark size="1.2rem" />} 
-            NavigateStyle="bg-Blue flex flex-row items-center justify-center gap-2 px-2 py-1 rounded-sm text-base text-white hover:text-bg-black"
+            NavigateStyle="bg-Blue flex flex-row items-center justify-center gap-2 px-2 py-1 rounded-sm text-base text-white hover:bg-black"
             NavigateText="Favourite Exercises"
         />
         { !UserID ?
