@@ -1,26 +1,30 @@
-import Axios from "axios";
-import React, { useEffect, useState } from 'react';
+import axios from "axios";
 import { useCookies } from "react-cookie";
 import { useParams } from 'react-router-dom';
-import { useGetUserID } from "../../Components/Hooks/useGetUserID";
+import React, { useEffect, useState } from 'react';
 import Output from '../../Components/Common/Output/Output';
+import { useGetUserID } from "../../Components/Hooks/useGetUserID";
 
 const WorkoutDetails:React.FC = () => {
 
-    const [Cookie, _] = useCookies(["auth_token"]);
-    const [Exercises, setExercises] = useState<any>([])
-    const [Workouts, setWorkouts] = useState([])
-    const [WorkoutName, setWorkoutName] = useState("")
-    const [WorkoutImages, setWorkoutImages] = useState("")
-    const [Videos, setVideos] = useState([])
     const { _id } = useParams();
-
     const userID = useGetUserID();
+    const [Cookie, _] = useCookies(["auth_token"]);
+
+    // USESTATE HOOK
+
+    const [Videos, setVideos] = useState<[]>([])
+    const [Workouts, setWorkouts] = useState<[]>([])
+    const [Exercises, setExercises] = useState<any>([])
+    const [WorkoutName, setWorkoutName] = useState<string>("")
+    const [WorkoutImages, setWorkoutImages] = useState<string>("")
+
+    // CALLING ON THE DETAILS OF THE USER'S CREATED WORKOUT(S)
 
     useEffect(() => {
 
     const fetchExercise = async () => {
-        Axios.get(`https://localhost:4000/Exercise/MyWorkouts/${_id}`, {
+        axios.get(`http://localhost:4000/Exercise/MyWorkouts/${_id}`, {
         headers: { authorization: Cookie.auth_token }
         }) 
         .then((Data) => {
@@ -34,6 +38,8 @@ const WorkoutDetails:React.FC = () => {
     }
     
     },[userID])
+
+    // CALLING ON THE DETAILS OF THE USER'S CREATED WORKOUT(S) FROM EXERCISE DB
 
     useEffect(() => {
 
@@ -64,6 +70,8 @@ const WorkoutDetails:React.FC = () => {
     }, [Exercises])
 
     let Link = WorkoutName
+
+    // CALLING ON YOUTUBE VIDEOS OF THE USER'S CREATED WORKOUT(S)
 
     useEffect(() => {
 
@@ -96,40 +104,40 @@ const WorkoutDetails:React.FC = () => {
     }, [WorkoutName])
 
 return (
-    <div className="flex flex-col gap-5" >
+    <div className="flex flex-col items-center mb-5 px-5" >
         <Output
-            figureStyle='flex flex-col gap-5 mb-5'
+            figureStyle='flex flex-col items-center gap-5 w-full lg:flex-row lg:w-6/12'
             image={WorkoutImages}
-            imageStyle='rounded w-11/12'
-            TitleStyle='capitalize font-bold text-black text-center text-3xl'
+            imageStyle='rounded lg:w-10/12'
+            TitleStyle='capitalize font-bold mb-10 text-center sm:text-left text-3xl underline'
             Title={Exercises.Name} 
             Description={Exercises.Category}
         >
-            <div className="flex gap-3">
-                <h2 className="font-bold text-2xl">Target Muscle: {Exercises.Muscle}</h2>
-                <h3 className="font-bold text-2xl">Instructions</h3>
+            <div className="flex flex-col gap-2 mt-2">
+                <h2 className="capitalize font-bold text-center sm:text-left text-2xl w-80">Target Muscle: {Exercises.Muscle}</h2>
+                <h3 className="capitalize font-bold text-center sm:text-left text-2xl underline w-80">Instructions</h3>
                 <li>{Exercises.Instructions}</li>
             </div>
         </Output>
-        <h2 className="capitalize font-bold text-black text-center text-4xl" >YouTube Videos</h2>
-        <section className="grid grid-cols-3 gap-5 items-center justify-center" >
+        <h2 className="font-bold mt-5 mb-10 text-center text-blue-600 text-4xl underline" >YouTube Videos</h2>
+        <section className="grid grid-cols-1 gap-10 items-center justify-center px-10 lg:grid-cols-3" >
             {Videos ? (
                 Videos?.slice(0,3).map((Video: any) => {
                     let ExerciseLink = Video.video.videoId  
                     return(
                         <a href={`https://www.youtube.com/watch?v=${ExerciseLink}`} target='_blank' rel='noreferrer' className='no-underline text-black'>
-                            <img src={Video.video.thumbnails[0].url} alt="" width="350px" />
-                            <h3 className="font-bold text-center text-2xl" >{Video.title}</h3>   
+                            <img src={Video.video.thumbnails[0].url} alt="" width="350px" className='rounded' />
+                            <h3 className="capitalize font-bold mt-5 text-center text-2xl" >{Video.video.title}</h3>   
                         </a>
                     )
                 })
             ) : (
-                <h2 className='font-bold text-red-700 text-center text-3xl'>No Results Found</h2> 
+                <h2 className='font-bold text-red-700 text-center text-3xl w-custom'>No Results Found</h2> 
             )
             }
         </section>
     </div>
 )
 }
-
+    
 export default WorkoutDetails
