@@ -1,43 +1,56 @@
 import * as z from 'zod';
-import Axios from "axios";
+import axios from "axios";
 import React, { useState } from 'react';
 import { useCookies } from "react-cookie";
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import Heading from '../../Components/Common/Heading/Heading';
 import Button from '../../Components/Common/Button/Button';
-
+import Heading from '../../Components/Common/Heading/Heading';
+import { useGetUserID } from "../../Components/Hooks/useGetUserID";
 interface FormValues {
     Name: string;
-    Muscle: string;
-    Instructions: string;
-    Category: string;
     Image: string;
+    Muscle: string;
+    userOwner: any;
+    Category: string;
+    Instructions: string;
 };
 
 const Customise:React.FC = () => {
 
+    const userID = useGetUserID();
     const [ Cookie,_ ] = useCookies(["auth_token"]);
-    const [ Success, setSuccess ] = useState('')
 
-    const RecipeSchema = z.object({
+    // USESTATE HOOK
+
+    const [ Success, setSuccess ] = useState<string>('')
+
+    // CREATION OF THE WORKOUT ZOD SCHEMA
+
+    const WorkoutSchema = z.object({
+        userOwner: z.any().default(userID),
         Name: z.string().min(1, 'Name is required'),
         Muscle: z.string().min(1, 'Muscle is required'),
-        Instructions: z.string().min(1, 'Instructions are required'),
-        Category: z.string().min(1, 'Category is required'),
         Image: z.string().min(1, 'Image link is required'),
+        Category: z.string().min(1, 'Category is required'),
+        Instructions: z.string().min(1, 'Instructions are required'),
     });
 
     const { register, handleSubmit, formState: { errors } } = useForm<FormValues>({
-        resolver: zodResolver(RecipeSchema),
+        resolver: zodResolver(WorkoutSchema),
     });
 
-    const AddWorkout: SubmitHandler<FormValues> = async (data) => {
-        await Axios.post("https://localhost:4000/Exercise/AddWorkout", data, {
+    type WorkoutData = z.infer<typeof WorkoutSchema>
+
+    // ADD WORKOUT FUNCTION
+
+    const AddWorkout: SubmitHandler<FormValues> = async (data: WorkoutData) => {
+        await axios.post("http://localhost:4000/Exercise/AddWorkout", data, {
             headers: { authorization: Cookie.auth_token },
         }) 
-        console.log(data)
-        setSuccess('Recipe has been successfully added.') 
+        .then(() => {
+            setSuccess('Workout has been successfully created.') 
+        })
     };
 
 return (
@@ -48,16 +61,16 @@ return (
             Heading='Create Workout'
             HeadingStyle='font-bold text-5xl'
         />
-        <section className='flex flex-col items-center mb-5'>
-            <form method="post" onSubmit={handleSubmit(AddWorkout)} encType="multipart/form-data" className='flex flex-col gap-5'>
-                <div className='flex flex-col gap-2'>
+        <section className='flex flex-col items-center justify-center mb-5'>
+            <form method="post" onSubmit={handleSubmit(AddWorkout)} encType="multipart/form-data" className='flex flex-col items-center justify-center gap-5 px-2'>
+                <div className='flex flex-col items-center justify-center gap-2 sm:items-start sm:justify-normal'>
                     <label className='font-bold' htmlFor="">Name</label> 
-                    <textarea placeholder="Enter Name..." {...register('Name', { required: 'Name is required' })} className='border-black border-b h-8 outline-none truncate px-1 py-1 text-black w-96' required />
+                    <textarea placeholder="Enter Name..." {...register('Name', { required: 'Name is required' })} className='border-black border-b h-8 outline-none truncate px-1 py-1 text-black w-80 sm:w-96' required />
                     {errors.Name && <p className="text-center text-red-700">{errors.Name.message}</p>}
                 </div>
-                <div className='flex flex-col gap-2'>
+                <div className='flex flex-col items-center justify-center gap-2 sm:items-start sm:justify-normal'>
                     <label className='font-bold' htmlFor="">Muscle</label>
-                    <select id="Select" className='border-black border-b h-8 outline-none truncate px-1 py-1 text-black w-96' {...register('Muscle', { required: 'Muscle is required' })} required >
+                    <select id="Select" className='border-black border-b h-8 outline-none truncate px-1 py-1 text-black w-80 sm:w-96' {...register('Muscle', { required: 'Muscle is required' })} required >
                         <option value="">Search among the bodyparts below</option>
                         <option value="back">Back</option>
                         <option value="cardio">Cardio</option>
@@ -72,14 +85,14 @@ return (
                     </select>
                     {errors.Muscle && <p className="text-center text-red-700">{errors.Muscle.message}</p>}
                 </div>
-                <div className='flex flex-col gap-2'>
+                <div className='flex flex-col items-center justify-center gap-2 sm:items-start sm:justify-normal'>
                     <label className='font-bold' htmlFor="">Instructions</label>
-                    <textarea placeholder='Enter Instructions...' className="border-black border-b h-20 outline-none px-1 py-2 w-96" {...register('Instructions', { required: 'Instructions are required' })} required ></textarea>
+                    <textarea placeholder='Enter Instructions...' className="border-black border-b h-20 outline-none px-1 py-2 w-80 sm:w-96" {...register('Instructions', { required: 'Instructions are required' })} required ></textarea>
                     {errors.Instructions && <p className="text-center text-red-700">{errors.Instructions.message}</p>}
                 </div>
-                <div className='flex flex-col gap-2'>
+                <div className='flex flex-col items-center justify-center gap-2 sm:items-start sm:justify-normal'>
                     <label className='font-bold' htmlFor="">Category</label>
-                    <select id="Select" className='border-black border-b h-8 outline-none truncate px-1 py-1 text-black w-96' {...register('Category', { required: 'Category is required' })} required >
+                    <select id="Select" className='border-black border-b h-8 outline-none truncate px-1 py-1 text-black w-80 sm:w-96' {...register('Category', { required: 'Category is required' })} required >
                         <option value="">Search among the categories below</option>
                         <option value="Weight and Reps">Weight and Reps</option>
                         <option value="Reps">Reps</option>
@@ -88,16 +101,16 @@ return (
                     </select>
                     {errors.Category && <p className="text-center text-red-700">{errors.Category.message}</p>}
                 </div>
-                <div className='flex flex-col gap-2'>
-                    <label className='font-bold' htmlFor="">Exercise Image <span className='font-bold' >(Copy Exercise Image Link from Exercise Section)</span></label>
-                    <textarea placeholder='Enter Image Link...' {...register('Image', { required: 'Image is required' })} className='border-black border-b h-8 outline-none px-2 py-1 truncate text-black w-96' required />
+                <div className='flex flex-col items-center justify-center gap-2 sm:items-start sm:justify-normal'>
+                    <label className='font-bold text-center' htmlFor="">Exercise Image <span className='font-bold' >(Copy Exercise Image Link from Exercise Section)</span></label>
+                    <textarea placeholder='Enter Image Link...' {...register('Image', { required: 'Image is required' })} className='border-black border-b h-8 outline-none px-2 py-1 truncate text-black w-80 sm:w-96' required />
                     {errors.Image && <p className="text-center text-red-700">{errors.Image.message}</p>}
                 </div>
                 <div className='mt-10'>
                     <h4 className='font-bold text-center text-green-700'>{Success}</h4>
                     <Button
                         ButtonText='Create Workout'
-                        ButtonStyle='bg-black cursor-pointer text-center text-white px-3 py-1 rounded'
+                        ButtonStyle='bg-black cursor-pointer text-center text-white px-3 py-1 rounded w-64'
                         onClick={handleSubmit(AddWorkout)}
                     />
                 </div>
