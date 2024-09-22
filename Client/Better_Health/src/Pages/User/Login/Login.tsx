@@ -1,102 +1,121 @@
-import * as z from 'zod';
 import axios from "axios";
-import React from 'react';
-import { useSnackbar } from 'notistack';
 import { useCookies } from "react-cookie";
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm, SubmitHandler } from 'react-hook-form';
-import Button from '../../../Components/Common/Button/Button';
+import React, { useEffect, useState } from 'react';
+import { faEye } from '@fortawesome/free-solid-svg-icons';
+import { useNavigate, useParams } from "react-router-dom";
+import Input from '../../../Components/Common/Input/Input';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import Button from "../../../Components/Common/Button/Button";
+import { faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import Heading from '../../../Components/Common/Heading/Heading';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 
-interface FormValues {
-    Email: string;
-    Password: string;
-};
+const Profile:React.FC = () => {
 
-const Login: React.FC  = () => {
+    const navigate = useNavigate()
+    const { userID } = useParams()
+    const [Cookie, _] = useCookies(["auth_token"])
 
-    // CREATION OF THE LOGIN ZOD SCHEMA
+    // USESTATE HOOK
 
-    const LoginSchema = z.object({
-        Email: z.string().min(1, { message: 'Email is required'}),
-        Password: z.string().min(1, { message: 'Password is required'}),
-    });
+    const [Name, setName] = useState<string>("")
+    const [Email, setEmail] = useState<string>("")
+    const [Password, setPassword] = useState<string>("")
+    const [showPassword, setShowPassword] = useState<boolean>(false)
 
-    const [_,setCookie] = useCookies(["auth_token"]); 
-    const { enqueueSnackbar } = useSnackbar();
+    // DISPLAYING AND HIDING OF PASSWORDS
 
-    const { register, handleSubmit, formState: { errors } } = useForm<FormValues>({
-        resolver: zodResolver(LoginSchema)
-    });
+    const handleTogglePassword = () => {
+        setShowPassword(!showPassword);
+    };
 
-    // ONLOGIN FUNCTION
+    // CALLING ON THE USER'S DETAILS
 
-    const onLogin : SubmitHandler<FormValues> = async (data) => {
-        try {
-            const response = await axios.post("http://localhost:4000/Users/Login", data)
-                setCookie("auth_token", response.data.Token)
-                window.localStorage.setItem("UserID", response.data.UserID)
-                enqueueSnackbar("Logged in successfully!" , {variant: "success"}) 
-                setTimeout(() => {
-                    window.location.reload();
-                }, 1500);
-        } catch (error) { 
-            enqueueSnackbar("Login unsuccessful!" , {variant: "error"})
-            console.log(error)
-        }
-    }
+    useEffect(() => {
 
-    const DemoLogin = async (e: any) => {
-        e.preventDefault()
-        const data = {
-            Email : "kiokoerick040@gmail.com" , Password : "Victory2024"
-        }
-        try {
-            const response = await axios.post("http://localhost:4000/Users/Login", data)
-                setCookie("auth_token", response.data.Token)
-                window.localStorage.setItem("UserID", response.data.UserID)
-                enqueueSnackbar("Logged in successfully!" , {variant: "success"}) 
-                window.location.reload();
-        } catch (error) { 
-            enqueueSnackbar("Login unsuccessful!" , {variant: "error"}) 
-            console.log(error) 
-        }
+        const FetchUser =() => {
+            try{
+                axios.get(`http://localhost:4000/Users/${userID}`, {
+                headers: { authorization: Cookie.auth_token },
+                }) 
+                .then((Data) => {
+                    setName(Data.data.Name)
+                    setEmail(Data.data.Email)
+                    setPassword(Data.data.Password) 
+                })
+            }
+            catch (Error){
+                console.log(Error)
+            }
+        }  
+        
+        FetchUser()
+
+    }, [])
+
+    // EDIT USER FUNCTION
+
+    const EditUser = () => {
+        navigate(`/EditProfile/${userID}`)
+    } 
+
+    // DELETE USER FUNCTION
+
+    const DeleteUser = () => {
+        navigate(`/DeleteProfile`)
     }
 
 return (
     <div>
         <Heading
-            idName='Login'
+            idName='Profile'
             ContainerStyle='flex flex-col items-center justify-center gap-5 mb-10 text-center text-white'
-            Heading='Login'
+            Heading='My Profile'
             HeadingStyle='font-bold text-5xl'
         />
-        <form method="post" onSubmit={handleSubmit(onLogin)} encType="multipart/form-data" className='flex flex-col items-center gap-2'>
-            <div className='flex flex-col gap-2'>
-                <label className='font-bold' htmlFor="Email">Email</label> 
-                <input placeholder="Enter Email..." {...register('Email', { required: 'Email is required' })} className='border-black border-b h-8 outline-none truncate px-1 py-2 text-black w-80 sm:w-96' required />
-                {errors.Email && <p className="text-center text-red-700">{errors.Email.message}</p>}
-            </div>
-            <div className='flex flex-col gap-2'>
-                <label className='font-bold' htmlFor="Password">Password</label> 
-                <input placeholder="Enter Password..." {...register('Password', { required: 'Password is required' })} className='border-black border-b h-8 outline-none truncate px-1 py-2 text-black w-80 sm:w-96' required />
-                {errors.Password && <p className="text-center text-red-700">{errors.Password.message}</p>}
-            </div>
-            <div className='flex gap-5 mt-5'>
+        <form encType="multipart/form-data" className='flex flex-col items-center gap-3'>
+            <Input 
+                ContainerStyle = 'flex flex-col gap-1'
+                Label = 'Name'
+                LabelStyle = 'font-bold'
+                inputStyle = 'border-black border-b h-5 outline-none truncate px-1 py-2 text-black w-80 sm:w-96' 
+                Value={Name}        
+            />
+            <Input 
+                ContainerStyle = 'flex flex-col gap-1'
+                Label = 'Email'
+                LabelStyle = 'font-bold'
+                inputStyle = 'border-black border-b h-5 outline-none truncate px-1 py-2 text-black w-80 sm:w-96'
+                Value={Email}
+            />
+            <Input 
+                ContainerStyle = 'flex flex-col w-80 sm:w-96'
+                Label = 'Password'
+                type={showPassword ? 'text' : 'password'}
+                LabelStyle = 'font-bold'
+                inputStyle = 'h-5 outline-none truncate px-1 py-2 text-black w-80 sm:w-96'
+                TextStyle="border-black border-b flex flex-row"
+                Value={Password}
+                Children={showPassword ? <FontAwesomeIcon icon={faEye} className="underline" onClick={handleTogglePassword} /> : <FontAwesomeIcon icon={faEyeSlash} className="underline" onClick={handleTogglePassword} />  }
+            />
+            <div className='flex gap-16 mt-5'>
                 <Button
-                    ButtonText='Login'
-                    ButtonStyle='bg-black cursor-pointer text-center text-white px-3 py-1 rounded w-40'
-                    onClick={handleSubmit(onLogin)}
+                    onClick={EditUser}
+                    ButtonStyle="bg-black cursor-pointer flex items-center justify-center gap-4 text-center text-white px-2 py-1.5 rounded w-40"
+                    ButtonText="Edit Details"
+                    Children={<FontAwesomeIcon icon={faPenToSquare} />}
                 />
                 <Button
-                    ButtonText='Demo Login'
-                    ButtonStyle='bg-black cursor-pointer text-center text-white px-3 py-1 rounded w-40'
-                    onClick={DemoLogin}
-                />
+                onClick={DeleteUser}
+                ButtonStyle="bg-black cursor-pointer flex items-center justify-center gap-4 text-center text-white px-2 py-1.5 rounded w-40"
+                ButtonText="Delete My Profile"
+                Children={<FontAwesomeIcon icon={faTrash} />}
+            />
             </div>
         </form>
     </div>
 )
 }
 
-export default Login
+export default Profile
