@@ -3,39 +3,44 @@ import { Link  } from 'react-router-dom';
 import { useCookies } from "react-cookie";
 import React, { useEffect, useState } from 'react';
 import ExercisingGif from "../../assets/Exercise.gif";
+import Button from "../../Components/Common/Button/Button";
 import Output from "../../Components/Common/Output/Output";
 import { useGetUserID } from "../../Components/Hooks/useGetUserID";
 
 const Favourites: React.FC = () => {
 
     const UserID = useGetUserID();
-
     const [Cookie, _] = useCookies(["auth_token"]); 
-    const [isLoading, setIsLoading] = useState(true);
-    const [ExerciseID, setExerciseID] = useState("")
-    const [ExerciseID2, setExerciseID2] = useState("")
-    const [ExerciseID3, setExerciseID3] = useState("")
-    const [ExerciseID4, setExerciseID4] = useState("")
-    const [ExerciseID5, setExerciseID5] = useState("")
-    const [ExerciseID6, setExerciseID6] = useState("")
+
+    // USESTATE HOOK
+
+    const [isLoading, setIsLoading] = useState<boolean>(true);
+    const [ExerciseID, setExerciseID] = useState<string>("")
+    const [ExerciseID2, setExerciseID2] = useState<string>("")
+    const [ExerciseID3, setExerciseID3] = useState<string>("")
+    const [ExerciseID4, setExerciseID4] = useState<string>("")
+    const [ExerciseID5, setExerciseID5] = useState<string>("")
+    const [ExerciseID6, setExerciseID6] = useState<string>("")
     const [Favourites, setFavourites] = useState<any>([])
     const [Favourites2, setFavourites2] = useState<any>([])
     const [Favourites3, setFavourites3] = useState<any>([])
     const [Favourites4, setFavourites4] = useState<any>([])
     const [Favourites5, setFavourites5] = useState<any>([])
     const [Favourites6, setFavourites6] = useState<any>([])
-    const [FavouritesID, setFavouritesID] = useState("")
-    const [FavouritesID2, setFavouritesID2] = useState("")
-    const [FavouritesID3, setFavouritesID3] = useState("")
-    const [FavouritesID4, setFavouritesID4] = useState("")
-    const [FavouritesID5, setFavouritesID5] = useState("")
-    const [FavouritesID6, setFavouritesID6] = useState("")
+    const [FavouritesID, setFavouritesID] = useState<string>("")
+    const [FavouritesID2, setFavouritesID2] = useState<string>("")
+    const [FavouritesID3, setFavouritesID3] = useState<string>("")
+    const [FavouritesID4, setFavouritesID4] = useState<string>("")
+    const [FavouritesID5, setFavouritesID5] = useState<string>("")
+    const [FavouritesID6, setFavouritesID6] = useState<string>("")
+
+    // CALLING ON THE USER'S FAVOURITE EXERCISE ID AND THE EXERCISE DB WORKOUT ID
 
     useEffect(() => {
 
         const fetchExerciseID = async () => {
             try {
-                await Axios.get(`https://localhost:4000/Favourites/${UserID}/Favourites`, {
+                await Axios.get(`http://localhost:4000/Favourites/${UserID}/Favourites`, {
                 headers: { authorization: Cookie.auth_token },
                 }) 
                 .then((response) =>   {
@@ -50,7 +55,7 @@ const Favourites: React.FC = () => {
 
         const fetchExerciseID2 = async () => { 
             try {
-                await Axios.get(`https://localhost:4000/Favourites/${UserID}/Favourites`, {
+                await Axios.get(`http://localhost:4000/Favourites/${UserID}/Favourites`, {
                 headers: { authorization: Cookie.auth_token },
                 }) 
                 .then((response) =>   {
@@ -65,7 +70,7 @@ const Favourites: React.FC = () => {
 
         const fetchExerciseID3 = async () => {
             try {
-                await Axios.get(`https://localhost:4000/Favourites/${UserID}/Favourites`, {
+                await Axios.get(`http://localhost:4000/Favourites/${UserID}/Favourites`, {
                 headers: { authorization: Cookie.auth_token },
                 }) 
                 .then((response) =>   {
@@ -80,7 +85,7 @@ const Favourites: React.FC = () => {
 
         const fetchExerciseID4 = async () => {
             try {
-                await Axios.get(`https://localhost:4000/Favourites/${UserID}/Favourites`, {
+                await Axios.get(`http://localhost:4000/Favourites/${UserID}/Favourites`, {
                 headers: { authorization: Cookie.auth_token },
                 }) 
                 .then((response) =>   {
@@ -95,7 +100,7 @@ const Favourites: React.FC = () => {
 
         const fetchExerciseID5 = async () => {
             try {
-                await Axios.get(`https://localhost:4000/Favourites/${UserID}/Favourites`, {
+                await Axios.get(`http://localhost:4000/Favourites/${UserID}/Favourites`, {
                 headers: { authorization: Cookie.auth_token },
                 }) 
                 .then((response) =>   {
@@ -110,7 +115,7 @@ const Favourites: React.FC = () => {
 
         const fetchExerciseID6 = async () => {
             try {
-                await Axios.get(`https://localhost:4000/Favourites/${UserID}/Favourites`, {
+                await Axios.get(`http://localhost:4000/Favourites/${UserID}/Favourites`, {
                 headers: { authorization: Cookie.auth_token },
                 }) 
                 .then((response) =>   {
@@ -148,6 +153,8 @@ const Favourites: React.FC = () => {
         } 
 
     },[UserID])
+
+    // CALLING ON THE USER'S FAVOURITE EXERCISES
 
     useEffect(()=> { 
 
@@ -240,8 +247,7 @@ const Favourites: React.FC = () => {
 
     },[ExerciseID3]) 
 
-    useEffect(()=> {  
-
+    useEffect(()=> {
         const fetchFavourites4 = () => {
             const url = `https://exercisedb.p.rapidapi.com/exercises/exercise/${ExerciseID4}`;  
             const options = {
@@ -327,8 +333,10 @@ const Favourites: React.FC = () => {
 
     },[ExerciseID6])
     
+    // DELETE FROM FAVOURITES
+
     const RemoveFromFavourites = (id: any) => {
-        Axios.delete(`https://localhost:4000/Favourites/${id}`, {
+        Axios.delete(`http://localhost:4000/Favourites/${id}`, {
             headers: { authorization: Cookie.auth_token }
         }) 
         .then(
@@ -336,18 +344,18 @@ const Favourites: React.FC = () => {
         )
     }
 
-return (
-    <article> 
-        <p className='font-bold text-red-700 text-xl'>Maximum number of favourites displayed is 6</p>
-        <div className='Favourite'>
-            {
-            isLoading ? (
-                <div className='flex flex-auto items-center justify-center gap-5 px-10' >
-                    <img src={ExercisingGif} alt="Loading..." className='w-max' />
-                </div>
-            ) : (
-            (Favourites) ? ( 
-                <div key={Favourites.id} >
+    return (
+        <article> 
+            <p className='font-bold mt-2 text-center text-red-600 text-xl'>Maximum number of favourites displayed is 6</p>
+            <div className='grid grid-cols-1 gap-5 px-10 sm:grid-cols-3'>
+                {
+                isLoading ? (
+                    <div className='flex flex-auto items-center justify-center gap-5 px-10' >
+                        <img src={ExercisingGif} alt="Loading..." className='w-max' />
+                    </div>
+                ) : (
+                (Favourites) ? ( 
+                    <div key={Favourites.id}>
                     <Link className='text-black no-underline' to={`/Workout/${Favourites.id}`} >
                         <Output
                                 figureStyle='flex flex-col gap-5 mb-5'
@@ -357,64 +365,79 @@ return (
                                 Title={Favourites.name}
                             >
                             <div className='flex flex-col gap-2 mt-5 text-center'>
-                                <h3 className='font-bold text-2xl capitalize'>Target Muscle: {Favourites.target}</h3>
-                                <h3 className='font-bold text-2xl capitalize'>Equipment: {Favourites.equipment}</h3> 
+                                { Favourites.target ? (<h3 className="capitalize font-bold text-2xl" >Target Muscle: {Favourites.target}</h3>) : null }
+                                { Favourites.equipment ? (<h3 className="capitalize font-bold text-2xl" >Equipment: {Favourites.equipment}</h3>) : null }
                             </div>
                         </Output>
                     </Link>
-                {ExerciseID ?<button onClick={() => RemoveFromFavourites(FavouritesID)}>Remove from Favourites</button> : null }    
+                    {ExerciseID ? 
+                    <Button
+                        onClick={() => RemoveFromFavourites(FavouritesID)}
+                        ButtonStyle='bg-Blue cursor-pointer m-auto rounded text-center text-white px-3 py-2 w-2/3'
+                        ButtonText='Remove from Favourites'
+                    /> : null }    
                 </div>
-            ) : <h2 className='Failure'>No Favourites Found.</h2>
-            )}
-            {
-            isLoading ? (
-                <div className='flex flex-auto items-center justify-center gap-5 px-10' >
-                    <img src={ExercisingGif} alt="Loading..." className='Loading' />
-                </div>
-            ) : (
-            (Favourites2) ? ( 
-                <div key={Favourites2.id} >
-                    <Link className='text-black no-underline' to={`/Workout/${Favourites2.id}`} >
-                        <Output
-                            figureStyle='flex flex-col gap-5 mb-5'
-                            image={Favourites2.gifUrl}
-                            imageStyle='rounded w-11/12 w-5/6 '
-                            TitleStyle='capitalize font-bold text-center text-3xl'
-                            Title={Favourites2.name}
-                        >
-                            <div className='flex flex-col gap-2 mt-5 text-center'>
-                                <h3 className='font-bold text-2xl capitalize'>Target Muscle: {Favourites2.target}</h3>
-                                <h3 className='font-bold text-2xl capitalize'>Equipment: {Favourites2.equipment}</h3> 
-                            </div>
-                        </Output>
-                    </Link>
-                    { ExerciseID2 ? <button onClick={() => RemoveFromFavourites(FavouritesID2)}>Remove from Favourites</button> : null }
-                </div>
-            ) : ""
-            )}
-            {
-            isLoading ? (
-                <div className='flex flex-auto items-center justify-center gap-5 px-10' >
-                    <img src={ExercisingGif} alt="Loading..." className='Loading' />
-                </div>
-            ) : (
-            (Favourites3) ? ( 
-                <div key={Favourites3.id} >
-                    <Link className='text-black no-underline' to={`/Workout/${Favourites3.id}`} >
-                        <Output
-                            figureStyle='flex flex-col gap-5 mb-5'
-                            image={Favourites3.gifUrl}
-                            imageStyle='rounded w-11/12 w-5/6 '
-                            TitleStyle='capitalize font-bold text-center text-3xl'
-                            Title={Favourites3.name}
-                        >
-                            <div className='flex flex-col gap-2 mt-5 text-center'>
-                                <h3 className='font-bold text-2xl capitalize'>Target Muscle: {Favourites3.target}</h3>
-                                <h3 className='font-bold text-2xl capitalize'>Equipment: {Favourites3.equipment}</h3> 
-                            </div>
-                        </Output>
-                    </Link>
-                        { ExerciseID3 ? <button onClick={() => RemoveFromFavourites(FavouritesID3)}>Remove from Favourites</button> : null
+                ) : <h2 className='font-bold text-red-700 text-lg'>No Favourites Found.</h2>
+                )}
+                {
+                isLoading ? (
+                    <div className='flex flex-auto items-center justify-center gap-5 px-10'>
+                        <img src={ExercisingGif} alt="Loading..." className='Loading' />
+                    </div>
+                ) : (
+                (Favourites2) ? ( 
+                    <div key={Favourites2.id} >
+                        <Link className='text-black no-underline' to={`/Workout/${Favourites2.id}`} >
+                            <Output
+                                figureStyle='flex flex-col gap-5 mb-5'
+                                image={Favourites2.gifUrl}
+                                imageStyle='rounded w-11/12 w-5/6 '
+                                TitleStyle='capitalize font-bold text-center text-3xl'
+                                Title={Favourites2.name}
+                            >
+                                <div className='flex flex-col gap-2 mt-5 text-center'>
+                                    { Favourites2.target ? (<h3 className="capitalize font-bold text-2xl" >Target Muscle: {Favourites2.target}</h3>) : null }
+                                    { Favourites2.equipment ? (<h3 className="capitalize font-bold text-2xl" >Equipment: {Favourites2.equipment}</h3>) : null }
+                                </div>
+                            </Output>
+                        </Link>
+                        { ExerciseID2 ? 
+                        <Button
+                            onClick={() => RemoveFromFavourites(FavouritesID2)}
+                            ButtonStyle='bg-Blue cursor-pointer m-auto rounded text-center text-white px-3 py-2 w-2/3'
+                            ButtonText='Remove from Favourites'
+                        /> : null }
+                    </div>
+                ) : ""
+                )}
+                {
+                isLoading ? (
+                    <div className='flex flex-auto items-center justify-center gap-5 px-10' >
+                        <img src={ExercisingGif} alt="Loading..." className='Loading' />
+                    </div>
+                ) : (
+                (Favourites3) ? ( 
+                    <div key={Favourites3.id}>
+                        <Link className='text-black no-underline' to={`/Workout/${Favourites3.id}`} >
+                            <Output
+                                figureStyle='flex flex-col gap-5 mb-5'
+                                image={Favourites3.gifUrl}
+                                imageStyle='rounded w-11/12 w-5/6 '
+                                TitleStyle='capitalize font-bold text-center text-3xl'
+                                Title={Favourites3.name}
+                            >
+                                <div className='flex flex-col gap-2 mt-5 text-center'>
+                                    { Favourites3.target ? (<h3 className="capitalize font-bold text-2xl" >Target Muscle: {Favourites3.target}</h3>) : null }
+                                    { Favourites3.equipment ? (<h3 className="capitalize font-bold text-2xl" >Equipment: {Favourites3.equipment}</h3>) : null }
+                                </div>
+                            </Output>
+                        </Link>
+                        { ExerciseID3 ? 
+                        <Button
+                            onClick={() => RemoveFromFavourites(FavouritesID3)}
+                            ButtonStyle='bg-Blue cursor-pointer m-auto rounded text-center text-white px-3 py-2 w-2/3'
+                            ButtonText='Remove from Favourites'
+                        /> : null
                         }
                 </div>
             ) : ""
@@ -436,12 +459,17 @@ return (
                             Title={Favourites4.name}
                         >
                             <div className='flex flex-col gap-2 mt-5 text-center'>
-                                <h3 className='font-bold text-2xl capitalize'>Target Muscle: {Favourites4.target}</h3>
-                                <h3 className='font-bold text-2xl capitalize'>Equipment: {Favourites4.equipment}</h3> 
+                                { Favourites4.target ? (<h3 className="capitalize font-bold text-2xl" >Target Muscle: {Favourites4.target}</h3>) : null }
+                                { Favourites4.equipment ? (<h3 className="capitalize font-bold text-2xl" >Equipment: {Favourites4.equipment}</h3>) : null }
                             </div>
                         </Output>
                     </Link>
-                    { ExerciseID4 ? <button onClick={() => RemoveFromFavourites(FavouritesID4)}>Remove from Favourites</button> : null
+                    { ExerciseID4 ? 
+                    <Button
+                        onClick={() => RemoveFromFavourites(FavouritesID4)}
+                        ButtonStyle='bg-Blue cursor-pointer m-auto rounded text-center text-white px-3 py-2 w-2/3'
+                        ButtonText='Remove from Favourites'
+                    /> : null
                     }
                 </div>
             ) : ""
@@ -462,13 +490,17 @@ return (
                             TitleStyle='capitalize font-bold text-center text-3xl'
                             Title={Favourites5.name}
                         >
-                            <div className='flex flex-col gap-2 mt-5 text-center'>
-                                <h3 className='font-bold text-2xl capitalize'>Target Muscle: {Favourites5.target}</h3>
-                                <h3 className='font-bold text-2xl capitalize'>Equipment: {Favourites5.equipment}</h3> 
+                            <div className='flex flex-col gap-2 mt-5 text-center'>{ Favourites5.target ? (<h3 className="capitalize font-bold text-2xl" >Target Muscle: {Favourites5.target}</h3>) : null }
+                                { Favourites5.equipment ? (<h3 className="capitalize font-bold text-2xl" >Equipment: {Favourites5.equipment}</h3>) : null }
                             </div>
                         </Output>
                     </Link>
-                    { ExerciseID5 ? <button onClick={() => RemoveFromFavourites(FavouritesID5)}>Remove from Favourites</button> : null
+                    { ExerciseID5 ? 
+                    <Button
+                        onClick={() => RemoveFromFavourites(FavouritesID5)}
+                        ButtonStyle='bg-Blue cursor-pointer m-auto rounded text-center text-white px-3 py-2 w-2/3'
+                        ButtonText='Remove from Favourites'
+                    /> : null
                     }
                 </div>
             ) : ""
@@ -490,12 +522,17 @@ return (
                             Title={Favourites6.name}
                         >
                             <div className='flex flex-col gap-2 mt-5 text-center'>
-                                <h3 className='font-bold text-2xl capitalize'>Target Muscle: {Favourites6.target}</h3>
-                                <h3 className='font-bold text-2xl capitalize'>Equipment: {Favourites6.equipment}</h3> 
+                                { Favourites6.target ? (<h3 className="capitalize font-bold text-2xl" >Target Muscle: {Favourites6.target}</h3>) : null }
+                                { Favourites6.equipment ? (<h3 className="capitalize font-bold text-2xl" >Equipment: {Favourites6.equipment}</h3>) : null }
                             </div>
                         </Output>
                     </Link>
-                    { ExerciseID6 ? <button onClick={() => RemoveFromFavourites(FavouritesID6)}>Remove from Favourites</button> : null
+                    { ExerciseID6 ? 
+                    <Button
+                        onClick={() => RemoveFromFavourites(FavouritesID6)}
+                        ButtonStyle='bg-Blue cursor-pointer m-auto rounded text-center text-white px-3 py-2 w-2/3'
+                        ButtonText='Remove from Favourites'
+                    /> : null
                     }
                 </div>
             ) : ""
@@ -506,4 +543,4 @@ return (
 )
 }
 
-export default Favourites 
+export default Favourites
