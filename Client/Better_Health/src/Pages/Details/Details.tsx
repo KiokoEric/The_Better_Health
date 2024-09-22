@@ -4,10 +4,15 @@ import Output from '../../Components/Common/Output/Output';
 
 const Details:React.FC = () => {
 
-    const [Details, setDetails] = useState("")
-    const [Videos, setVideos] = useState([])
-    const { id } = useParams();
+    const { id } = useParams()
 
+    // USESTATE HOOK
+
+    const [Videos, setVideos] = useState<[]>([])
+    const [Details, setDetails] = useState<any>('')
+
+    // CALLING ON THE DETAILS OF THE EXERCISE BY EXERCISE ID
+    
     useEffect(() => {
 
     const ExerciseDetails = () => {
@@ -37,6 +42,8 @@ const Details:React.FC = () => {
     }, [id])
 
     let Link = Details.name 
+
+    // CALLING ON YOUTUBE VIDEOS BASED ON EXERCISE NAME
 
     useEffect(() => {
 
@@ -70,28 +77,28 @@ const Details:React.FC = () => {
 
 
 return (
-    <div>
+    <div className='flex flex-col items-center justify-center mb-5 px-5'>
         <Output
-            figureStyle='flex flex-row gap-5 mb-5'
+            figureStyle='flex flex-col items-center gap-5 lg:flex-row w-10/12 lg:w-5/12'
             image={Details.gifUrl}
-            imageStyle='rounded w-11/12 w-5/6 '
-            TitleStyle='capitalize font-bold text-center text-3xl'
+            imageStyle='rounded lg:w-10/12'
+            TitleStyle='capitalize font-bold mb-20 text-center sm:text-left text-3xl underline'
             Title={Details.name}
         >
-            <div className='flex flex-col gap-2 mt-5 text-center'>
-                <h3 className='font-bold text-2xl capitalize'>Target Muscle: {Details.target}</h3>
-                <h3 className='font-bold text-2xl capitalize'>Equipment: {Details.equipment}</h3> 
+            <div className='flex flex-col gap-2 mt-2'>
+                <h3 className='capitalize font-bold text-center sm:text-left text-2xl w-80'>Target Muscle: {Details.target}</h3>
+                <h3 className='capitalize font-bold text-center sm:text-left text-2xl w-80'>Equipment: {Details.equipment}</h3> 
             </div>
         </Output>
-        <h2>YouTube Videos</h2>
-        <section>
+        <h2 className='font-bold mt-5 mb-10 text-center text-blue-600 text-4xl underline' >YouTube Videos</h2>
+        <section className='grid grid-cols-1 gap-10 items-center justify-center px-10 lg:grid-cols-3' >
             {
                 Videos?.slice(0,3).map((Video: any) => {
                     let ExerciseLink = Video.video.videoId
                     return(
-                        <a href={`https://www.youtube.com/watch?v=${ExerciseLink}`} target='_blank' rel='noreferrer' className='Youtube'>
-                            <img src={Video.video.thumbnails[0].url} alt="" />
-                            <h3>{Video.video.title}</h3>
+                        <a href={`https://www.youtube.com/watch?v=${ExerciseLink}`} target='_blank' rel='noreferrer' className='flex flex-col items-center justify-center'>
+                            <img src={Video.video.thumbnails[0].url} alt="" className='rounded' />
+                            <h3 className='capitalize font-bold mt-5 text-center text-2xl'>{Video.video.title}</h3>
                         </a>
                     )
                 })
