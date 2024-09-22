@@ -11,6 +11,8 @@ UserRouter.use(cookieParser())
 
 const myPassword = process.env.Password
 
+// REGISTRATION OF A USER
+
 UserRouter.post("/Registration", async (req, res) => {
 
     // Checking if the user is already in the database
@@ -36,6 +38,8 @@ UserRouter.post("/Registration", async (req, res) => {
     }
 })
 
+// USER LOGIN
+
 UserRouter.post("/Login", async (req, res) => {
 
     // Checking if the email is in the database
@@ -55,6 +59,8 @@ UserRouter.post("/Login", async (req, res) => {
     }  
 })
 
+// GETTING A USER BY THEIR ID
+
 UserRouter.get('/:id', async (req, res) => {
     try {
     const UserDetails = await User.findById(req.params.id);
@@ -67,7 +73,7 @@ UserRouter.get('/:id', async (req, res) => {
     }
 });
 
-// UPDATE
+// UPDATING A USER'S DETAILS
 
 UserRouter.put("/:id", async (req, res) => {
     const userId = req.params.id;
@@ -89,6 +95,8 @@ UserRouter.put("/:id", async (req, res) => {
     }
 }) 
 
+// GETTING THE USER'S NAME
+
 UserRouter.get('/:userId/Name', async (req, res) => { 
 
     try {
@@ -102,7 +110,7 @@ UserRouter.get('/:userId/Name', async (req, res) => {
     }
 });
 
-// DELETE
+// DELETING THE USER'S PROFILE
 
 UserRouter.delete("/Delete/:id", async (req, res) => { 
     try {
@@ -117,8 +125,10 @@ UserRouter.delete("/Delete/:id", async (req, res) => {
     }
 })
 
+// USER'S LOGOUT
+
 UserRouter.get("/Logout", (req, res) => {
     res.clearCookie("Token");
 })
 
-module.exports = UserRouter; 
+module.exports = UserRouter;
