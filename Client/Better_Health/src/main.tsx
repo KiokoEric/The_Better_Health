@@ -12,7 +12,7 @@ library.add(fas);
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <BrowserRouter>
     <SnackbarProvider>
-      <App />
+        <App />
     </SnackbarProvider>
   </BrowserRouter>
 )
