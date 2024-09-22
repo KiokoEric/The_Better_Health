@@ -21,6 +21,8 @@ html::-webkit-scrollbar-track {
 body {
   font-family: 'Instrument Serif', serif;
   font-size: 18px;
+  min-height: 35rem;
+  overflow-x: hidden;
 }
 #Exercise {
   background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(./assets/Exercise_HomeImage.jpg);
@@ -63,7 +65,7 @@ body {
   width: 100%;
 }
 #Login {
-  background-image: linear-gradient( rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3) ), url(./assets/Login_HomePage.jpg);
+  background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.3) ), url(./assets/Login_HomePage.jpg);
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -71,7 +73,7 @@ body {
   width: 100%;
 }
 #Profile {
-  background-image: url(./assets/Profile_HomePage.jpg);
+  background-image:linear-gradient( rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3) ), url(./assets/Profile_HomePage.jpg);
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -93,4 +95,92 @@ body {
   background-size: cover;
   height: 250px;
   width: 100%;
+}
+#Copy {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+}
+#Copy:hover::after {
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  color: black;
+  content: "Copy Exercise Link";
+  font-family: 'Instrument Serif', serif;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 5px;
+  position: absolute;
+  top: 40px;
+  text-align: center;
+  transform: translateX(-50%);
+  width: 120px;
+  z-index: 1;
+}
+#Bookmark {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+}
+#Bookmark:hover::after {
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  color: black;
+  content: "Add to Favourites";
+  font-family: 'Instrument Serif', serif;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 5px;
+  position: absolute;
+  top: 40px;
+  text-align: center;
+  transform: translateX(-50%);
+  width: 120px;
+  z-index: 1;
+}
+#Edit {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+}
+#Edit:hover::after {
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  color: black;
+  content: "Edit Workout";
+  font-family: 'Instrument Serif', serif;
+  font-size: 17px;
+  font-weight: bold;
+  padding: 5px;
+  position: absolute;
+  top: 45px;
+  text-align: center;
+  transform: translateX(-50%);
+  width: 90px;
+  z-index: 1;
+}
+#Delete {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+}
+#Delete:hover::after {
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  color: black;
+  content: "Delete Workout";
+  font-family: 'Instrument Serif', serif;
+  font-size: 17px;
+  font-weight: bold;
+  padding: 5px;
+  position: absolute;
+  top: 45px;
+  text-align: center;
+  transform: translateX(-50%);
+  width: 90px;
+  z-index: 1;
 }
