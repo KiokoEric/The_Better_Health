@@ -1,13 +1,13 @@
+const cors = require("cors");
+const dotenv = require('dotenv');
 const express = require('express');
 const mongoose = require("mongoose");
 const cookieParser = require("cookie-parser");
-const cors = require("cors");
-const dotenv = require('dotenv');
 const app = express();
 
 dotenv.config();
 
-// Middleware
+// MIDDLEWARE
 
 app.use(cors({
     origin: ["http://localhost:5173"],
@@ -17,14 +17,14 @@ app.use(cors({
 app.use(express.json())
 app.use(cookieParser())
 
-    // MongoDB Connection   
+// MONGODB CONNECTION 
 
 const dbUrl = process.env.MONGODB_URL
 
 mongoose.connect(dbUrl) 
 .then(() => console.log("Connected to the database!"))
 
-    // import Routes
+// IMPORT ROUTES
 
     const UserRoute = require("./Routes/UserRoute");
     const ExerciseRoute = require("./Routes/ExerciseRoute"); 
@@ -32,6 +32,6 @@ mongoose.connect(dbUrl)
 
     app.use("/Users", UserRoute);
     app.use("/Exercise", ExerciseRoute);
-    app.use("/Favourites", FavouriteRoute);
+    app.use("/Favourites", FavouriteRoute);  
 
-app.listen(4000)   
+app.listen(4000)
