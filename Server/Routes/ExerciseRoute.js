@@ -25,6 +25,8 @@ const verifyToken = async (req, res, next) => {
     }
 }
 
+// ADDING A WORKOUT
+
 ExerciseRoute.post("/AddWorkout", verifyToken ,async (req, res) => {
     const Workouts = new Workout(req.body)
 
@@ -36,15 +38,19 @@ ExerciseRoute.post("/AddWorkout", verifyToken ,async (req, res) => {
     }
 })
 
+// GETTING ALL THE WORKOUTS CREATED BY ALL THE USERS
+
 ExerciseRoute.get("/AllWorkouts", async (req, res) => { 
     try{
         const AllWorkouts = await Workout.find() 
-        res.json(AllRecipes)
+        res.json(AllWorkouts)
     }
     catch(err) { 
         res.send(err)  
     }
 })
+
+// GETTING ALL THE WORKOUTS CREATED BY A SINGLE USER BY THEIR USER ID
 
 ExerciseRoute.get('/:userId/Workout', async (req, res) => {
     const userId = req.params.userId;
@@ -52,11 +58,11 @@ ExerciseRoute.get('/:userId/Workout', async (req, res) => {
         const Workouts = await Workout.find({ userOwner: userId });
         res.json(Workouts);
     } catch (error) {
-        res.status(500).json({ message: 'Error fetching blogs.' });
+        res.status(500).json({ message: 'Error fetching workouts.' });
     }
 });
 
-// UPDATE
+// UPDATING A WORKOUT BASED ON THE WORKOUT ID
 
 ExerciseRoute.put("/:id", async (req, res) => {
     try{
@@ -68,7 +74,7 @@ ExerciseRoute.put("/:id", async (req, res) => {
     }
 })
 
-// DELETE
+// DELETING A WORKOUT BASED ON THE WORKOUT ID
 
 ExerciseRoute.delete("/:id", async (req, res) => {
     try{
@@ -80,11 +86,13 @@ ExerciseRoute.delete("/:id", async (req, res) => {
     }
 })
 
+// GETTING A WORKOUT BY ITS ID
+
 ExerciseRoute.get('/MyWorkouts/:id', async (req, res) => {
     try {
     const Workouts = await Workout.findById(req.params.id);
     if (!Workouts) {
-        return res.status(404).json({ message: 'Exercise not found' });
+        return res.status(404).json({ message: 'Workout not found' });
     }
     res.json(Workouts);
     } catch (error) {
@@ -92,4 +100,4 @@ ExerciseRoute.get('/MyWorkouts/:id', async (req, res) => {
     }
 });
 
-module.exports = ExerciseRoute 
+module.exports = ExerciseRoute
