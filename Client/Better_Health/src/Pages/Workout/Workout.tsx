@@ -1,28 +1,32 @@
-import Axios from "axios";
-import React, { useEffect, useState } from 'react';
+import axios from "axios";
 import { Link } from 'react-router-dom';
 import { useCookies } from "react-cookie";
-import { MdDelete } from "react-icons/md";
-import { MdEditSquare } from "react-icons/md";
 import loadingGif from "../../assets/Exercise.gif";
+import React, { useEffect, useState } from 'react';
 import WorkoutImages  from "../../assets/Workout.jpg";
 import Output from "../../Components/Common/Output/Output";
-import Heading from '../../Components/Common/Heading/Heading';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import Heading from "../../Components/Common/Heading/Heading";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 import { useGetUserID } from "../../Components/Hooks/useGetUserID";
-
 
 const Workout:React.FC = () => {
 
-    const [Cookie, _] = useCookies(["auth_token"]);
-    const [isLoading, setIsLoading] = useState(true);
-    const [Exercises, setExercises] = useState([])
-
     const userID = useGetUserID();
+    const [Cookie, _] = useCookies(["auth_token"]);
+
+    // USESTATE HOOK
+
+    const [Exercises, setExercises] = useState<[]>([])
+    const [isLoading, setIsLoading] = useState<boolean>(true);
+
+    // CALLING ON THE USER'S CREATED EXERCISE(S)
 
     useEffect(() => {
 
         const fetchExercise = async () => {
-            Axios.get(`https://localhost:4000/Exercise/${userID}/Workout`, { 
+            axios.get(`http://localhost:4000/Exercise/${userID}/Workout`, { 
             headers: { authorization: Cookie.auth_token }
             }) 
             .then((Data) => {
@@ -34,9 +38,19 @@ const Workout:React.FC = () => {
         }
 
         fetchExercise()
-    
         
-        },[userID])
+    },[userID])
+
+    // DELETE WORKOUT
+
+    const handleDelete= (_id: any) => {
+        axios.delete(`http://localhost:4000/Exercise/${_id}`, {
+            headers: { authorization: Cookie.auth_token }
+        }) 
+        .then(
+            window.location.reload()
+        )
+    }
 
 return (
     <div>
@@ -46,10 +60,10 @@ return (
             Heading='My Workout'
             HeadingStyle='font-bold text-5xl'
         />
-        <section className='flex flex-auto items-center justify-center gap-5 px-10'>
+        <section className='grid grid-cols-1 items-center justify-center gap-5 px-10 sm:grid-cols-3'>
         {isLoading ? (
-                <div className='flex flex-col items-center justify-center'>
-                    <img src={loadingGif} alt="Loading..." className="w-max" />
+                <div className='flex flex-col items-center justify-center w-custom'>
+                    <img src={loadingGif} alt="Loading..." />
                 </div>
             ) : (
                 (Exercises.length > 0) ?  
@@ -64,13 +78,17 @@ return (
                             Title={Exercise.Name} 
                             Description={Exercise.Category}
                         />
-                        <div className="flex gap-3 justify-end">
-                            <MdEditSquare size="1rem" className="bg-Blue" color="black" />
-                            <MdDelete size="1rem" className="bg-Blue" color="black" />
+                        <div className="flex gap-3 items-center justify-center">
+                            <Link id="Edit" to={`/Edit/${Exercise._id}`} key={Exercise._id}>
+                                <FontAwesomeIcon icon={faPenToSquare} className="bg-Blue cursor-pointer font-bold p-3 rounded-full text-xl" />
+                            </Link>
+                            <div id="Delete">
+                                <FontAwesomeIcon icon={faTrash} className="bg-Blue cursor-pointer font-bold p-3 rounded-full text-xl" onClick={() => handleDelete(Exercise._id)} /> 
+                            </div>
                         </div>
                     </Link>
                 )
-                }) : <h2 className='font-bold text-red-700 text-center text-3xl'>No Workouts Found.</h2> 
+                }) : <h2 className='font-bold m-auto text-red-700 text-center text-5xl w-custom'>No Workouts Found.</h2> 
             )
             }
         </section>
