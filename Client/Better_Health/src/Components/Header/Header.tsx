@@ -62,7 +62,7 @@ return (
             <Navigate
                 Navigation="/Home"
                 children={<img src={Logo} alt="" width="45px" />}
-                NavigateStyle="flex gap-4 font-bold items-center justify-center text-black text-2xl no-underline sm:text-3xl"
+                NavigateStyle="flex gap-2 font-bold items-center justify-center text-black text-2xl no-underline sm:text-3xl"
                 NavigateText="Better Health"
             />
         </section>
