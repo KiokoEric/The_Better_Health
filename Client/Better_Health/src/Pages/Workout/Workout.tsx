@@ -4,12 +4,13 @@ import { useCookies } from "react-cookie";
 import loadingGif from "../../assets/Exercise.gif";
 import React, { useEffect, useState } from 'react';
 import WorkoutImages  from "../../assets/Workout.jpg";
+import Button from "../../Components/Common/Button/Button";
 import Output from "../../Components/Common/Output/Output";
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import Heading from "../../Components/Common/Heading/Heading";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare } from '@fortawesome/free-solid-svg-icons';
-import { useGetUserID } from "../../Components/Hooks/useGetUserID";
+import { useGetUserID } from "../../Components/Hooks/useGetUserID"; 
 
 const Workout:React.FC = () => {
 
@@ -56,7 +57,7 @@ return (
     <div>
         <Heading
             idName='MyWorkout'
-            ContainerStyle='flex flex-col items-center justify-center gap-5 mb-10 text-center text-white'
+            ContainerStyle='flex flex-col items-center justify-center gap-5 mb-4 text-center text-white'
             Heading='My Workout'
             HeadingStyle='font-bold text-5xl'
         />
@@ -69,7 +70,8 @@ return (
                 (Exercises.length > 0) ?  
                 Exercises.map((Exercise: any) => {
                 return (
-                    <Link to={`/WorkoutDetails/${Exercise._id}`} className='flex flex-col gap-3 text-black no-underline' key={Exercise.Name} >
+                <div>
+                    <Link to={`/WorkoutDetails/${Exercise._id}`} className='flex flex-col gap-1 text-black no-underline' key={Exercise.Name} >
                         <Output
                             figureStyle='flex flex-col gap-5 mb-5'
                             image={WorkoutImages}
@@ -78,15 +80,18 @@ return (
                             Title={Exercise.Name} 
                             Description={Exercise.Category}
                         />
-                        <div className="flex gap-3 items-center justify-center">
-                            <Link id="Edit" to={`/Edit/${Exercise._id}`} key={Exercise._id}>
-                                <FontAwesomeIcon icon={faPenToSquare} className="bg-Blue cursor-pointer font-bold p-3 rounded-full text-xl" />
-                            </Link>
-                            <div id="Delete">
-                                <FontAwesomeIcon icon={faTrash} className="bg-Blue cursor-pointer font-bold p-3 rounded-full text-xl" onClick={() => handleDelete(Exercise._id)} /> 
-                            </div>
-                        </div>
-                    </Link>
+                    </Link> 
+                    <div className="flex gap-3 items-center justify-center">
+                        <Link id="Edit" to={`/Edit/${Exercise._id}`} key={Exercise._id}>
+                            <FontAwesomeIcon icon={faPenToSquare} className="bg-Blue cursor-pointer font-bold p-3 rounded-full text-xl" />
+                        </Link>
+                        <Button
+                            ID="Delete"
+                            onClick={() => handleDelete(Exercise._id)}
+                            Children={<FontAwesomeIcon icon={faTrash} className="bg-Blue cursor-pointer font-bold p-3 rounded-full text-xl" />}
+                        />
+                    </div> 
+                </div>
                 )
                 }) : <h2 className='font-bold m-auto text-red-700 text-center text-5xl w-custom'>No Workouts Found.</h2> 
             )
