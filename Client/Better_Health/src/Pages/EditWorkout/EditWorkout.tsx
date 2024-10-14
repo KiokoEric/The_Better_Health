@@ -120,7 +120,7 @@ return (
                 <div className='mt-10'>
                     <h4 className='font-bold text-center text-green-700'>{Success}</h4>
                     <Button
-                        ButtonText='Create Workout'
+                        ButtonText='Edit Workout'
                         ButtonStyle='bg-black cursor-pointer text-center text-white px-3 py-1 rounded'
                         onClick={EditWorkout}
                     />
