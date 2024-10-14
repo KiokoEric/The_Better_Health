@@ -21,7 +21,7 @@ html::-webkit-scrollbar-track {
 body {
   font-family: 'Instrument Serif', serif;
   font-size: 18px;
-  min-height: 35rem;
+  min-height: 50rem;
   overflow-x: hidden;
 }
 #Exercise {
@@ -53,7 +53,7 @@ body {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  height: 250px;
+  height: 200px;
   width: 100%;
 }
 #Registration {
@@ -129,6 +129,7 @@ body {
   border-radius: 3px;
   color: black;
   content: "Add to Favourites";
+  cursor: pointer;
   font-family: 'Instrument Serif', serif;
   font-size: 16px;
   font-weight: bold;
@@ -151,8 +152,9 @@ body {
   border-radius: 3px;
   color: black;
   content: "Edit Workout";
+  cursor: pointer;
   font-family: 'Instrument Serif', serif;
-  font-size: 17px;
+  font-size: 16px;
   font-weight: bold;
   padding: 5px;
   position: absolute;
@@ -173,14 +175,15 @@ body {
   border-radius: 3px;
   color: black;
   content: "Delete Workout";
+  cursor: pointer;
   font-family: 'Instrument Serif', serif;
-  font-size: 17px;
+  font-size: 16px;
   font-weight: bold;
   padding: 5px;
   position: absolute;
   top: 45px;
   text-align: center;
-  transform: translateX(-50%);
-  width: 90px;
+  transform: translateX(-50%); 
+  width: 120px;
   z-index: 1;
 }
