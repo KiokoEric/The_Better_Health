@@ -15,7 +15,7 @@ return (
     <figure className={figureStyle} >
         <img src={image} alt="" className={imageStyle} /> 
         <figcaption>
-            <h2 className={TitleStyle}>{Title} <span>{Description}</span></h2>
+            <h2 className={TitleStyle}>{Title} <span>({Description})</span></h2>
             {children}
         </figcaption>
     </figure>
