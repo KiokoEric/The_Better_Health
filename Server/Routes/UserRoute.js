@@ -1,10 +1,10 @@
+const dotenv = require('dotenv');
+const bcrypt = require("bcryptjs");
 const express = require('express');
 const UserRouter = express.Router();
-const cookieParser = require("cookie-parser");
-const dotenv = require('dotenv');
-const User = require("../Models/Users");
 const jwt = require("jsonwebtoken");
-const bcrypt = require("bcryptjs");
+const User = require("../Models/Users");
+const cookieParser = require("cookie-parser");
 
 dotenv.config();
 UserRouter.use(cookieParser())
