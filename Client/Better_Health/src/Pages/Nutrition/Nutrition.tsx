@@ -70,7 +70,7 @@ return (
                     <div className='flex flex-col items-center justify-center sm:w-2/5 sm:items-start sm:justify-start lg:w-1/5 xl:w-2/5'>
                         <img src={Nutrition.recipe.image} alt="" className='mb-5 rounded w-11/12'  />
                         <a href={Nutrition.recipe.url} target='_blank' rel='noreferrer' className='flex items-center gap-2' >
-                            <p className='font-bold text-center text-xl sm:text-left'>Recipe Instructions</p><FontAwesomeIcon icon={faArrowUpRightFromSquare} />
+                            <p className='font-bold text-center text-xl sm:text-left hover:text-Blue'>Recipe Instructions</p><FontAwesomeIcon icon={faArrowUpRightFromSquare} />
                         </a>
                     </div>
                     <figcaption className='flex flex-col items-center gap-2 lg:items-start'>
