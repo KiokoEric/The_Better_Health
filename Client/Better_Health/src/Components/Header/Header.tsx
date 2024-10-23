@@ -1,5 +1,4 @@
 import axios from "axios";
-import { Link } from 'react-router-dom';
 import { FaUser } from "react-icons/fa6";
 import { useCookies } from "react-cookie";
 import Button from '../Common/Button/Button';
@@ -103,7 +102,7 @@ return (
         <Navigate
             Navigation="/Favourites"
             children={<IoIosBookmark size="1.2rem" />} 
-            NavigateStyle="bg-Blue flex flex-row items-center justify-center gap-2 px-2 py-1 rounded-sm text-base text-white hover:text-bg-black"
+            NavigateStyle="bg-Blue flex flex-row items-center justify-center gap-2 px-2 py-1 rounded-sm text-base text-white hover:bg-black"
             NavigateText="Favourite Exercises"
         />
         { !UserID ?
@@ -133,6 +132,7 @@ return (
     {
     UserID ? 
         <Navigate
+            ID='ProfileIcon'
             Navigation={`/Profile/${UserID}`}
             children={<FaUser size="2rem" className="bg-black text-white cursor-pointer px-1.5 py-1.5 rounded-full" />}
         /> : null
@@ -144,6 +144,7 @@ return (
     {
     UserID ?
         <Navigate
+            ID='ProfileIcon'
             Navigation={`/Profile/${UserID}`}
             children={<FaUser size="1.8rem" className="bg-black text-white cursor-pointer px-1.5 py-1.5 rounded-full" />}
         /> : null
@@ -157,7 +158,7 @@ return (
 </div>
 {/* MOBILE MENU */}
 {ExtendNavbar && (
-    <nav className="bg-white absolute top-16 right-0 flex flex-col gap-4 m-auto pl-4 pt-2 pb-8 rounded-Header text-base text-black w-36 xl:hidden">
+    <nav className="bg-white absolute top-16 right-0 flex flex-col gap-4 m-auto pl-4 pt-2 pb-8 rounded-Header text-base text-black w-36 z-50 xl:hidden">
         <Navigate 
             Navigation='/Home'
             NavigateStyle="border-b border-black text-black no-underline w-28 hover:text-Blue"
