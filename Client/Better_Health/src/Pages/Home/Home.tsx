@@ -14,22 +14,22 @@ return (
             <div className='grid gap-5 xl:grid-cols-4'>
                 <Navigate 
                     Navigation={'/Exercise'}
-                    NavigateStyle='bg-Blue no-underline px-8 py-2 text-center text-white rounded'
+                    NavigateStyle='bg-Blue no-underline px-8 py-2 text-center text-white rounded hover:bg-black'
                     NavigateText='Exercise'
                 />
                 <Navigate 
                     Navigation={'/Nutrition'}
-                    NavigateStyle='bg-Blue no-underline px-8 py-2 text-center text-white rounded'
+                    NavigateStyle='bg-Blue no-underline px-8 py-2 text-center text-white rounded hover:bg-black'
                     NavigateText='Nutrition'
                 />
                 <Navigate 
                     Navigation={'/Fitness_Calculator'}
-                    NavigateStyle='bg-Blue no-underline px-3 py-2 text-center text-white rounded'
+                    NavigateStyle='bg-Blue no-underline px-3 py-2 text-center text-white rounded hover:bg-black'
                     NavigateText='Fitness Calculator'
                 />
                 <Navigate 
                     Navigation={'/MyWorkout'}
-                    NavigateStyle='bg-Blue no-underline px-8 py-2 text-center text-white rounded'
+                    NavigateStyle='bg-Blue no-underline px-8 py-2 text-center text-white rounded hover:bg-black'
                     NavigateText='My Workout'
                 />
             </div>
