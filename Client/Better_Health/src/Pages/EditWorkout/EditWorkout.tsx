@@ -66,7 +66,7 @@ return (
             HeadingStyle='font-bold text-5xl'
         />
         <section className='flex flex-col items-center mb-5'>
-            <form method="post" onSubmit={EditWorkout} encType="multipart/form-data" className='flex flex-col gap-5'>
+            <form method="post" onSubmit={EditWorkout} encType="multipart/form-data" className='flex flex-col items-center justify-center gap-5 px-2'>
                 <Input 
                     ContainerStyle = 'flex flex-col gap-2'
                     Label = 'Name'
@@ -121,7 +121,7 @@ return (
                     <h4 className='font-bold text-center text-green-700'>{Success}</h4>
                     <Button
                         ButtonText='Edit Workout'
-                        ButtonStyle='bg-black cursor-pointer text-center text-white px-3 py-1 rounded'
+                        ButtonStyle='bg-Blue cursor-pointer text-center text-white px-3 py-1 rounded w-64 hover:bg-black'
                         onClick={EditWorkout}
                     />
                 </div>
