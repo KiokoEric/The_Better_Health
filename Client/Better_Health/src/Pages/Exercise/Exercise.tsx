@@ -110,6 +110,7 @@ const Exercise: React.FC = () => {
                                     imageStyle='rounded w-11/12 w-5/6 '
                                     TitleStyle='capitalize font-bold text-center text-3xl'
                                     Title={Exercise.name}
+                                    DescriptionStyle="hidden"
                                 >
                                     <div className='flex flex-col gap-2 mt-5 text-center'>
                                         <h3 className='font-bold text-2xl capitalize'>Target Muscle: {Exercise.target}</h3>
@@ -121,12 +122,12 @@ const Exercise: React.FC = () => {
                                 <Button
                                     ID="Bookmark"
                                     onClick={() => AddToFavourites(Exercise.id)}
-                                    Children={<FontAwesomeIcon icon={faBookmark} className='bg-Blue cursor-pointer p-2 rounded-sm text-white text-xl' />}
+                                    Children={<FontAwesomeIcon icon={faBookmark} className='bg-Blue cursor-pointer p-2 rounded-sm text-white text-xl hover:bg-black' />}
                                 />
                                 <Button
                                     ID="Copy"
                                     onClick={() => handleCopy(Exercise.id)}
-                                    Children={<FontAwesomeIcon icon={faCopy}  className='bg-Blue cursor-pointer p-2 rounded-sm text-white text-xl' />}
+                                    Children={<FontAwesomeIcon icon={faCopy}  className='bg-Blue cursor-pointer p-2 rounded-sm text-white text-xl hover:bg-black' />}
                                 />
                             </div>
                         </div>
