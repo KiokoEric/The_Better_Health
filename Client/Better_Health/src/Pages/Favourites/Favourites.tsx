@@ -363,6 +363,7 @@ const Favourites: React.FC = () => {
                                 imageStyle='rounded w-11/12 w-5/6 '
                                 TitleStyle='capitalize font-bold text-center text-3xl'
                                 Title={Favourites.name}
+                                DescriptionStyle="hidden"
                             >
                             <div className='flex flex-col gap-2 mt-5 text-center'>
                                 { Favourites.target ? (<h3 className="capitalize font-bold text-2xl" >Target Muscle: {Favourites.target}</h3>) : null }
@@ -394,6 +395,7 @@ const Favourites: React.FC = () => {
                                 imageStyle='rounded w-11/12 w-5/6 '
                                 TitleStyle='capitalize font-bold text-center text-3xl'
                                 Title={Favourites2.name}
+                                DescriptionStyle="hidden"
                             >
                                 <div className='flex flex-col gap-2 mt-5 text-center'>
                                     { Favourites2.target ? (<h3 className="capitalize font-bold text-2xl" >Target Muscle: {Favourites2.target}</h3>) : null }
@@ -425,6 +427,7 @@ const Favourites: React.FC = () => {
                                 imageStyle='rounded w-11/12 w-5/6 '
                                 TitleStyle='capitalize font-bold text-center text-3xl'
                                 Title={Favourites3.name}
+                                DescriptionStyle="hidden"
                             >
                                 <div className='flex flex-col gap-2 mt-5 text-center'>
                                     { Favourites3.target ? (<h3 className="capitalize font-bold text-2xl" >Target Muscle: {Favourites3.target}</h3>) : null }
@@ -457,6 +460,7 @@ const Favourites: React.FC = () => {
                             imageStyle='rounded w-11/12 w-5/6 '
                             TitleStyle='capitalize font-bold text-center text-3xl'
                             Title={Favourites4.name}
+                            DescriptionStyle="hidden"
                         >
                             <div className='flex flex-col gap-2 mt-5 text-center'>
                                 { Favourites4.target ? (<h3 className="capitalize font-bold text-2xl" >Target Muscle: {Favourites4.target}</h3>) : null }
@@ -489,6 +493,7 @@ const Favourites: React.FC = () => {
                             imageStyle='rounded w-11/12 w-5/6 '
                             TitleStyle='capitalize font-bold text-center text-3xl'
                             Title={Favourites5.name}
+                            DescriptionStyle="hidden"
                         >
                             <div className='flex flex-col gap-2 mt-5 text-center'>{ Favourites5.target ? (<h3 className="capitalize font-bold text-2xl" >Target Muscle: {Favourites5.target}</h3>) : null }
                                 { Favourites5.equipment ? (<h3 className="capitalize font-bold text-2xl" >Equipment: {Favourites5.equipment}</h3>) : null }
@@ -520,6 +525,7 @@ const Favourites: React.FC = () => {
                             imageStyle='rounded w-11/12 w-5/6 '
                             TitleStyle='capitalize font-bold text-center text-3xl'
                             Title={Favourites6.name}
+                            DescriptionStyle="hidden"
                         >
                             <div className='flex flex-col gap-2 mt-5 text-center'>
                                 { Favourites6.target ? (<h3 className="capitalize font-bold text-2xl" >Target Muscle: {Favourites6.target}</h3>) : null }
