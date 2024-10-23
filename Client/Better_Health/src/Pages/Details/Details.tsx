@@ -84,6 +84,7 @@ return (
             imageStyle='rounded lg:w-10/12'
             TitleStyle='capitalize font-bold mb-20 text-center sm:text-left text-3xl underline'
             Title={Details.name}
+            DescriptionStyle="hidden"
         >
             <div className='flex flex-col gap-2 mt-2'>
                 <h3 className='capitalize font-bold text-center sm:text-left text-2xl w-80'>Target Muscle: {Details.target}</h3>
