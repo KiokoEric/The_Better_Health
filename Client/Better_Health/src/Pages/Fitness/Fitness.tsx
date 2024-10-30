@@ -110,7 +110,7 @@ const Fitness: React.FC = () => {
                     <span>{BMIError}</span>
                     <Button
                         ButtonText='Calculate'
-                        ButtonStyle='bg-Blue cursor-pointer mt-6 py-2 rounded-sm text-center text-white w-52'
+                        ButtonStyle='bg-Blue cursor-pointer mt-6 py-2 rounded-sm text-center text-white w-52 hover:bg-black'
                         onClick={BMICalculator}
                     />
                     <div className='flex gap-10 items-center justify-center mt-5'>
@@ -187,7 +187,7 @@ const Fitness: React.FC = () => {
                     <span>{CaloriesError}</span>
                     <Button
                         ButtonText='Calculate'
-                        ButtonStyle='bg-Blue cursor-pointer py-2 rounded-sm text-center text-white w-52'
+                        ButtonStyle='bg-Blue cursor-pointer py-2 rounded-sm text-center text-white w-52 hover:bg-black'
                         onClick={CalorieCalculator}
                     />
                     <section className='flex flex-col justify-center gap-5'>
