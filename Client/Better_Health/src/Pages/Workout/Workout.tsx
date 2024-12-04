@@ -48,8 +48,9 @@ const Workout:React.FC = () => {
         axios.delete(`http://localhost:4000/Exercise/${_id}`, {
             headers: { authorization: Cookie.auth_token }
         }) 
-        .then(
+        .then(() => {
             window.location.reload()
+        }
         )
     }
 

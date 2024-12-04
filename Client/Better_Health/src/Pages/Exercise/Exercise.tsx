@@ -19,9 +19,9 @@ const Exercise: React.FC = () => {
 
     // USESTATE HOOK
 
+    const [userOwner, __] = useState<any>(userID)
     const [Search,setSearch] = useState<string>("")
     const [Exercises, setExercises] = useState<[]>([])
-    const [userOwner, setuserOwner] = useState<any>(userID)
     const [SearchError, setSearchError] = useState<string>("")
 
     // ONSEARCH FUNCTION

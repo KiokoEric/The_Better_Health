@@ -339,8 +339,9 @@ const Favourites: React.FC = () => {
         Axios.delete(`http://localhost:4000/Favourites/${id}`, {
             headers: { authorization: Cookie.auth_token }
         }) 
-        .then(
+        .then(() => {
             window.location.reload()
+        }
         )
     }
 
