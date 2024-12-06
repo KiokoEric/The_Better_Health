@@ -40,7 +40,7 @@ const Favourites: React.FC = () => {
 
         const fetchExerciseID = async () => {
             try {
-                await Axios.get(`http://localhost:4000/Favourites/${UserID}/Favourites`, {
+                await Axios.get(`https://better-health-server.onrender.com/Favourites/${UserID}/Favourites`, {
                 headers: { authorization: Cookie.auth_token },
                 }) 
                 .then((response) =>   {
@@ -55,7 +55,7 @@ const Favourites: React.FC = () => {
 
         const fetchExerciseID2 = async () => { 
             try {
-                await Axios.get(`http://localhost:4000/Favourites/${UserID}/Favourites`, {
+                await Axios.get(`https://better-health-server.onrender.com/Favourites/${UserID}/Favourites`, {
                 headers: { authorization: Cookie.auth_token },
                 }) 
                 .then((response) =>   {
@@ -70,7 +70,7 @@ const Favourites: React.FC = () => {
 
         const fetchExerciseID3 = async () => {
             try {
-                await Axios.get(`http://localhost:4000/Favourites/${UserID}/Favourites`, {
+                await Axios.get(`https://better-health-server.onrender.com/Favourites/${UserID}/Favourites`, {
                 headers: { authorization: Cookie.auth_token },
                 }) 
                 .then((response) =>   {
@@ -85,7 +85,7 @@ const Favourites: React.FC = () => {
 
         const fetchExerciseID4 = async () => {
             try {
-                await Axios.get(`http://localhost:4000/Favourites/${UserID}/Favourites`, {
+                await Axios.get(`https://better-health-server.onrender.com/Favourites/${UserID}/Favourites`, {
                 headers: { authorization: Cookie.auth_token },
                 }) 
                 .then((response) =>   {
@@ -100,7 +100,7 @@ const Favourites: React.FC = () => {
 
         const fetchExerciseID5 = async () => {
             try {
-                await Axios.get(`http://localhost:4000/Favourites/${UserID}/Favourites`, {
+                await Axios.get(`https://better-health-server.onrender.com/Favourites/${UserID}/Favourites`, {
                 headers: { authorization: Cookie.auth_token },
                 }) 
                 .then((response) =>   {
@@ -115,7 +115,7 @@ const Favourites: React.FC = () => {
 
         const fetchExerciseID6 = async () => {
             try {
-                await Axios.get(`http://localhost:4000/Favourites/${UserID}/Favourites`, {
+                await Axios.get(`https://better-health-server.onrender.com/Favourites/${UserID}/Favourites`, {
                 headers: { authorization: Cookie.auth_token },
                 }) 
                 .then((response) =>   {
@@ -336,7 +336,7 @@ const Favourites: React.FC = () => {
     // DELETE FROM FAVOURITES
 
     const RemoveFromFavourites = (id: any) => {
-        Axios.delete(`http://localhost:4000/Favourites/${id}`, {
+        Axios.delete(`https://better-health-server.onrender.com/Favourites/${id}`, {
             headers: { authorization: Cookie.auth_token }
         }) 
         .then(() => {

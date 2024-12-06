@@ -28,7 +28,7 @@ const EditWorkout:React.FC = () => {
     // CALLING CREATED WORKOUT DATA
 
     useEffect(() => {
-        axios.get(`http://localhost:4000/Exercise/MyWorkouts/${_id}`, {
+        axios.get(`https://better-health-server.onrender.com/Exercise/MyWorkouts/${_id}`, {
                 headers: { authorization: Cookie.auth_token },
             }) 
         .then((Data) => { 
@@ -48,7 +48,7 @@ const EditWorkout:React.FC = () => {
         const data = {
             Name, Category, Muscle, Instructions, Image, userOwner
         }
-        axios.put(`http://localhost:4000/Exercise/${_id}`, data , {
+        axios.put(`https://better-health-server.onrender.com/Exercise/${_id}`, data , {
             headers: { authorization: Cookie.auth_token },
         }) 
         .then(() => {

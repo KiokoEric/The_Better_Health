@@ -46,7 +46,7 @@ const Customise:React.FC = () => {
     // ADD WORKOUT FUNCTION
 
     const AddWorkout: SubmitHandler<FormValues> = async (data: WorkoutData) => {
-        await axios.post("http://localhost:4000/Exercise/AddWorkout", data, {
+        await axios.post("https://better-health-server.onrender.com/Exercise/AddWorkout", data, {
             headers: { authorization: Cookie.auth_token },
         }) 
         .then(() => {

@@ -59,7 +59,7 @@ const Exercise: React.FC = () => {
             ID, userOwner
         }
         try {
-            await axios.post("http://localhost:4000/Favourites/AddFavourite", data, {
+            await axios.post("https://better-health-server.onrender.com/Favourites/AddFavourite", data, {
                 headers: { authorization: Cookie.auth_token },
             });
         } catch (error) {

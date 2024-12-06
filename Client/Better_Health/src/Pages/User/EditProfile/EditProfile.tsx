@@ -35,7 +35,7 @@ const EditProfile:React.FC = () => {
 
         const FetchUser =() => {
             try{
-                axios.get(`http://localhost:4000/Users/${userID}`, {
+                axios.get(`https://better-health-server.onrender.com/Users/${userID}`, {
                 headers: { authorization: Cookie.auth_token },
                 }) 
                 .then((Data) => {
