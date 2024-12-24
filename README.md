@@ -5,7 +5,7 @@ Better Health is an online destination for holistic health and fitness guidance.
 
   <br><br>
   
-The website application was built using React JS, TypeScript, Express JS, Mongo DB and use of ExerciseDB API, Edamam API and calories-burned-by-api-ninjas.
+The website application was built using React JS, Tailwind CSS, TypeScript, Express JS, Mongo DB and use of ExerciseDB API, Edamam API and calories-burned-by-api-ninjas.
 
 [Live Demo](https://betterhealth-eight.vercel.app)
 </div>
