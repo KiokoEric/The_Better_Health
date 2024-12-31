@@ -86,7 +86,7 @@ The website application was built using React JS, Tailwind CSS, TypeScript, Expr
 <h3 align="center" >Customise Workout Section</h3>
 
   <div align="center" >
-    <img  src="https://i.postimg.cc/FHP0cKbv/Create-Page.jpg"> 
+    <img  src="https://i.postimg.cc/s2QPnpcK/Create-Page.jpg"> 
 
   </div>
 
