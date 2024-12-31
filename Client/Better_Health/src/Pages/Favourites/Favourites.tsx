@@ -375,7 +375,7 @@ const Favourites: React.FC = () => {
                     {ExerciseID ? 
                     <Button
                         onClick={() => RemoveFromFavourites(FavouritesID)}
-                        ButtonStyle='bg-Blue cursor-pointer m-auto rounded text-center text-white px-3 py-2 w-2/3'
+                        ButtonStyle='bg-Blue cursor-pointer m-auto rounded text-center text-white px-3 py-2 w-2/3 hover:bg-black'
                         ButtonText='Remove from Favourites'
                     /> : null }    
                 </div>
@@ -407,7 +407,7 @@ const Favourites: React.FC = () => {
                         { ExerciseID2 ? 
                         <Button
                             onClick={() => RemoveFromFavourites(FavouritesID2)}
-                            ButtonStyle='bg-Blue cursor-pointer m-auto rounded text-center text-white px-3 py-2 w-2/3'
+                            ButtonStyle='bg-Blue cursor-pointer m-auto rounded text-center text-white px-3 py-2 w-2/3 hover:bg-black'
                             ButtonText='Remove from Favourites'
                         /> : null }
                     </div>
@@ -439,7 +439,7 @@ const Favourites: React.FC = () => {
                         { ExerciseID3 ? 
                         <Button
                             onClick={() => RemoveFromFavourites(FavouritesID3)}
-                            ButtonStyle='bg-Blue cursor-pointer m-auto rounded text-center text-white px-3 py-2 w-2/3'
+                            ButtonStyle='bg-Blue cursor-pointer m-auto rounded text-center text-white px-3 py-2 w-2/3 hover:bg-black'
                             ButtonText='Remove from Favourites'
                         /> : null
                         }
@@ -472,7 +472,7 @@ const Favourites: React.FC = () => {
                     { ExerciseID4 ? 
                     <Button
                         onClick={() => RemoveFromFavourites(FavouritesID4)}
-                        ButtonStyle='bg-Blue cursor-pointer m-auto rounded text-center text-white px-3 py-2 w-2/3'
+                        ButtonStyle='bg-Blue cursor-pointer m-auto rounded text-center text-white px-3 py-2 w-2/3 hover:bg-black'
                         ButtonText='Remove from Favourites'
                     /> : null
                     }
@@ -504,7 +504,7 @@ const Favourites: React.FC = () => {
                     { ExerciseID5 ? 
                     <Button
                         onClick={() => RemoveFromFavourites(FavouritesID5)}
-                        ButtonStyle='bg-Blue cursor-pointer m-auto rounded text-center text-white px-3 py-2 w-2/3'
+                        ButtonStyle='bg-Blue cursor-pointer m-auto rounded text-center text-white px-3 py-2 w-2/3 hover:bg-black'
                         ButtonText='Remove from Favourites'
                     /> : null
                     }
@@ -537,7 +537,7 @@ const Favourites: React.FC = () => {
                     { ExerciseID6 ? 
                     <Button
                         onClick={() => RemoveFromFavourites(FavouritesID6)}
-                        ButtonStyle='bg-Blue cursor-pointer m-auto rounded text-center text-white px-3 py-2 w-2/3'
+                        ButtonStyle='bg-Blue cursor-pointer m-auto rounded text-center text-white px-3 py-2 w-2/3 hover:bg-black'
                         ButtonText='Remove from Favourites'
                     /> : null
                     }
